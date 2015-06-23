@@ -36,9 +36,15 @@
     "thru.io/active_record_migrations": "dev-master",
     "thru.io/translation": "dev-master",
     "thru.io/session": "dev-master",
-    "flynsarmy/slim-monolog": "~1.0"
+    "flynsarmy/slim-monolog": "~1.0",
+    "symfony/yaml": "2.6.6"
   },
-  "autoload"   : {
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "codeclimate/php-test-reporter": "dev-master",
+    "fzaninotto/faker": "1.5.*@dev"
+  },
+  "autoload": {
     "psr-4": {
       "TigerKit\\": "src"
     }
