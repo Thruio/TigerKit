@@ -1,0 +1,8 @@
+Implement User Roles instead of using an enum on the User
+Wrap Translation so that a globally-available t() function is around.
+Write tests surrounding the User Model.
+Write tests surrounding the TigerApp class.
+Add support for Redis Caching. Might want to write a library. Might want to get ActiveRecord to exploit that library.
+Add support for adding CSS dynamically to the document.
+Add support for adding JS dynamically to the document.
+Write support for SASS -> CSS. And Cache it. And minify/gzip it.

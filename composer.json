@@ -42,7 +42,8 @@
   "require-dev": {
     "phpunit/phpunit": "*",
     "codeclimate/php-test-reporter": "dev-master",
-    "fzaninotto/faker": "1.5.*@dev"
+    "fzaninotto/faker": "1.5.*@dev",
+    "leafo/scssphp": "0.0.12"
   },
   "autoload": {
     "psr-4": {
