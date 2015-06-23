@@ -1,0 +1,12 @@
+{
+    "name": "thru.io/starter-kit",
+    "description": "Starter kit using Slim, Active Record, Sessions, Translation, Docker all in a can.",
+    "license": "GPL V2",
+    "authors": [
+        {
+            "name": "Matthew Baggett",
+            "email": "matthew@baggett.me"
+        }
+    ],
+    "require": {}
+}
