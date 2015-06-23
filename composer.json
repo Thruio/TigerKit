@@ -1,12 +1,50 @@
 {
-    "name": "thru.io/starter-kit",
-    "description": "Starter kit using Slim, Active Record, Sessions, Translation, Docker all in a can.",
-    "license": "GPL V2",
-    "authors": [
-        {
-            "name": "Matthew Baggett",
-            "email": "matthew@baggett.me"
-        }
-    ],
-    "require": {}
+  "name": "thru.io/starter-kit",
+  "description": "Starter kit using Slim, Active Record, Sessions, Translation, Docker all in a can.",
+  "license": "GPL V2",
+  "authors": [
+    {
+      "name": "Matthew Baggett",
+      "email": "matthew@baggett.me"
+    }
+  ],
+  "repositories": [
+    {
+      "url": "https://github.com/Thruio/ActiveRecord.git",
+      "type": "git"
+    },
+    {
+      "url": "https://github.com/Thruio/ActiveRecordMigrations.git",
+      "type": "git"
+    },
+    {
+      "url": "https://github.com/Thruio/Session.git",
+      "type": "git"
+    },
+    {
+      "url": "https://github.com/Thruio/Translation.git",
+      "type": "git"
+    }
+  ],
+  "require": {
+    "slim/slim": "2.*",
+    "filp/whoops": "1.*",
+    "zeuxisoo/slim-whoops": "dev-master",
+    "raveren/kint": "dev-master",
+    "predis/predis": "1.0.*@dev",
+    "thru.io/active_record": ">=0.2",
+    "thru.io/active_record_migrations": "dev-master",
+    "thru.io/translation": "dev-master",
+    "thru.io/session": "dev-master"
+  },
+  "autoload"   : {
+    "psr-4": {
+      "TigerKit\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TigerKit\\Test\\": "tests/"
+    }
+  }
 }

@@ -1,0 +1,896 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "1b5e44500c076c86a3ef478b48e2d171",
+    "packages": [
+        {
+            "name": "filp/whoops",
+            "version": "1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/filp/whoops.git",
+                "reference": "37b5e653c99cbb9113108d7dc59a0ddc306acc46"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/37b5e653c99cbb9113108d7dc59a0ddc306acc46",
+                "reference": "37b5e653c99cbb9113108d7dc59a0ddc306acc46",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Whoops": "src/"
+                },
+                "classmap": [
+                    "src/deprecated"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Filipe Dobreira",
+                    "homepage": "https://github.com/filp",
+                    "role": "Developer"
+                }
+            ],
+            "description": "php error handling for cool kids",
+            "homepage": "https://github.com/filp/whoops",
+            "keywords": [
+                "error",
+                "exception",
+                "handling",
+                "library",
+                "silex-provider",
+                "whoops",
+                "zf2"
+            ],
+            "time": "2015-05-29 15:12:07"
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "version": "5.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/guzzle.git",
+                "reference": "f3c8c22471cb55475105c14769644a49c3262b93"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f3c8c22471cb55475105c14769644a49c3262b93",
+                "reference": "f3c8c22471cb55475105c14769644a49c3262b93",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/ringphp": "^1.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "^4.0",
+                "psr/log": "^1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "5.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Guzzle is a PHP HTTP client library and framework for building RESTful web service clients",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "client",
+                "curl",
+                "framework",
+                "http",
+                "http client",
+                "rest",
+                "web service"
+            ],
+            "time": "2015-05-20 03:47:55"
+        },
+        {
+            "name": "guzzlehttp/ringphp",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/RingPHP.git",
+                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/RingPHP/zipball/dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "reference": "dbbb91d7f6c191e5e405e900e3102ac7f261bc0b",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/streams": "~3.0",
+                "php": ">=5.4.0",
+                "react/promise": "~2.0"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Guzzle will use specific adapters if cURL is present"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Ring\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple API and specification that abstracts away the details of HTTP into a single PHP function.",
+            "time": "2015-05-20 03:37:09"
+        },
+        {
+            "name": "guzzlehttp/streams",
+            "version": "3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/guzzle/streams.git",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/guzzle/streams/zipball/47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "reference": "47aaa48e27dae43d39fc1cea0ccf0d84ac1a2ba5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GuzzleHttp\\Stream\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael Dowling",
+                    "email": "mtdowling@gmail.com",
+                    "homepage": "https://github.com/mtdowling"
+                }
+            ],
+            "description": "Provides a simple abstraction over streams of data",
+            "homepage": "http://guzzlephp.org/",
+            "keywords": [
+                "Guzzle",
+                "stream"
+            ],
+            "time": "2014-10-12 19:18:40"
+        },
+        {
+            "name": "kevinlebrun/colors.php",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kevinlebrun/colors.php.git",
+                "reference": "b13d23b9365ece519abc0eaa77cd3061c5810d30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kevinlebrun/colors.php/zipball/b13d23b9365ece519abc0eaa77cd3061c5810d30",
+                "reference": "b13d23b9365ece519abc0eaa77cd3061c5810d30",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Colors": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kevin Le Brun",
+                    "email": "lebrun.k@gmail.com",
+                    "homepage": "http://kevinlebrun.fr",
+                    "role": "developer"
+                }
+            ],
+            "description": "Colors for PHP CLI scripts",
+            "homepage": "https://github.com/kevinlebrun/colors.php",
+            "keywords": [
+                "cli",
+                "color",
+                "colors",
+                "console",
+                "shell"
+            ],
+            "time": "2012-03-25 18:18:10"
+        },
+        {
+            "name": "nategood/commando",
+            "version": "0.2.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nategood/commando.git",
+                "reference": "873183f0062514ff8c50851f0d8ce98cbbd5ac72"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nategood/commando/zipball/873183f0062514ff8c50851f0d8ce98cbbd5ac72",
+                "reference": "873183f0062514ff8c50851f0d8ce98cbbd5ac72",
+                "shasum": ""
+            },
+            "require": {
+                "kevinlebrun/colors.php": "0.2.*",
+                "php": ">=5.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Commando": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Good",
+                    "email": "me@nategood.com"
+                }
+            ],
+            "description": "PHP CLI Commando Style",
+            "homepage": "http://github.com/nategood/commando",
+            "keywords": [
+                "automation",
+                "cli",
+                "command",
+                "command line",
+                "command line interface",
+                "scripting"
+            ],
+            "time": "2015-01-05 15:55:41"
+        },
+        {
+            "name": "predis/predis",
+            "version": "1.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nrk/predis.git",
+                "reference": "c4c36cae7ab09bdeef7f85b1c3d55fe120aa1117"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/c4c36cae7ab09bdeef7f85b1c3d55fe120aa1117",
+                "reference": "c4c36cae7ab09bdeef7f85b1c3d55fe120aa1117",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "suggest": {
+                "ext-curl": "Allows access to Webdis when paired with phpiredis",
+                "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Predis\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniele Alessandri",
+                    "email": "suppakilla@gmail.com",
+                    "homepage": "http://clorophilla.net"
+                }
+            ],
+            "description": "Flexible and feature-complete PHP client library for Redis",
+            "homepage": "http://github.com/nrk/predis",
+            "keywords": [
+                "nosql",
+                "predis",
+                "redis"
+            ],
+            "time": "2015-01-02 12:54:29"
+        },
+        {
+            "name": "raveren/kint",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/raveren/kint.git",
+                "reference": "74f51addd833af89ebc5360ceec4d6816bd767c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/raveren/kint/zipball/74f51addd833af89ebc5360ceec4d6816bd767c0",
+                "reference": "74f51addd833af89ebc5360ceec4d6816bd767c0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "Kint.class.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rokas Šleinius",
+                    "homepage": "https://github.com/raveren"
+                },
+                {
+                    "name": "Contributors",
+                    "homepage": "https://github.com/raveren/kint/contributors"
+                }
+            ],
+            "description": "Kint - debugging helper for PHP developers",
+            "homepage": "https://github.com/raveren/kint",
+            "keywords": [
+                "debug",
+                "kint",
+                "php"
+            ],
+            "time": "2015-06-05 12:56:14"
+        },
+        {
+            "name": "react/promise",
+            "version": "v2.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/reactphp/promise.git",
+                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
+                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                },
+                "files": [
+                    "src/functions_include.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@googlemail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "time": "2014-12-30 13:32:42"
+        },
+        {
+            "name": "slim/slim",
+            "version": "2.6.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/slimphp/Slim.git",
+                "reference": "20a02782f76830b67ae56a5c08eb1f563c351a37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/slimphp/Slim/zipball/20a02782f76830b67ae56a5c08eb1f563c351a37",
+                "reference": "20a02782f76830b67ae56a5c08eb1f563c351a37",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "suggest": {
+                "ext-mcrypt": "Required for HTTP cookie encryption"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Slim": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Josh Lockhart",
+                    "email": "info@joshlockhart.com",
+                    "homepage": "http://www.joshlockhart.com/"
+                }
+            ],
+            "description": "Slim Framework, a PHP micro framework",
+            "homepage": "http://github.com/codeguy/Slim",
+            "keywords": [
+                "microframework",
+                "rest",
+                "router"
+            ],
+            "time": "2015-03-08 18:41:17"
+        },
+        {
+            "name": "stichoza/google-translate-php",
+            "version": "v3.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Stichoza/google-translate-php.git",
+                "reference": "8720d3004d9fa8f83aad918b29a6d43f25e5f70c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Stichoza/google-translate-php/zipball/8720d3004d9fa8f83aad918b29a6d43f25e5f70c",
+                "reference": "8720d3004d9fa8f83aad918b29a6d43f25e5f70c",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Stichoza\\GoogleTranslate\\": "src/"
+                },
+                "psr-4": {
+                    "Stichoza\\GoogleTranslate\\": "src/Stichoza/GoogleTranslate/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Levan Velijanashvili",
+                    "email": "me@stichoza.com"
+                }
+            ],
+            "description": "Free Google Translate API PHP Package",
+            "homepage": "http://github.com/Stichoza/google-translate-php",
+            "keywords": [
+                "google",
+                "php",
+                "translate"
+            ],
+            "time": "2015-06-02 19:36:34"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.6.6",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "174f009ed36379a801109955fc5a71a49fe62dd4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/174f009ed36379a801109955fc5a71a49fe62dd4",
+                "reference": "174f009ed36379a801109955fc5a71a49fe62dd4",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                },
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com",
+            "time": "2015-03-30 15:54:10"
+        },
+        {
+            "name": "thru.io/active_record",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/ActiveRecord.git",
+                "reference": "85c465c73905eeba61a5e3266146a24a3ff7cc16"
+            },
+            "require": {
+                "thru.io/json-pretty-printer": "1.0.*",
+                "thru.io/uuid": "1.0"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "fzaninotto/faker": "1.5.*@dev",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thru\\ActiveRecord\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Thru\\ActiveRecord\\Test\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "An active-record like implementation",
+            "time": "2015-05-27 01:40:38"
+        },
+        {
+            "name": "thru.io/active_record_migrations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/ActiveRecordMigrations.git",
+                "reference": "8e945fddd21c9519ca0309f615c9d84ab1baf266"
+            },
+            "require": {
+                "nategood/commando": "*",
+                "symfony/yaml": "2.6.6",
+                "thru.io/active_record": "0.2.*"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "fzaninotto/faker": "1.5.*@dev",
+                "phpunit/phpunit": "*"
+            },
+            "bin": [
+                "ar_migrate"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thru\\ActiveRecordMigrations\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Thru\\ActiveRecordMigrations\\Test\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "Migrations for Active Record",
+            "time": "2015-05-28 00:27:03"
+        },
+        {
+            "name": "thru.io/json-pretty-printer",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/JsonPrettyPrinter.git",
+                "reference": "44f00ec368590c184faccbdbb395caa2aa6b080b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Thruio/JsonPrettyPrinter/zipball/44f00ec368590c184faccbdbb395caa2aa6b080b",
+                "reference": "44f00ec368590c184faccbdbb395caa2aa6b080b",
+                "shasum": ""
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Thru\\JsonPrettyPrinter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL V2"
+            ],
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "A simple, well-tested JSON pretty printer and related stuff",
+            "time": "2015-02-18 10:41:12"
+        },
+        {
+            "name": "thru.io/session",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/Session.git",
+                "reference": "7ea740cc9ddeb8e616b379abc521d24a13c6aef3"
+            },
+            "require": {
+                "thru.io/active_record": ">=0.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thru\\Session\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Thru\\Session\\Test\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "Sessions handler",
+            "time": "2015-06-23 10:50:25"
+        },
+        {
+            "name": "thru.io/translation",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/Translation.git",
+                "reference": "4a1298beb68fa406d706f68d297d76db26b2ded0"
+            },
+            "require": {
+                "nategood/commando": "*",
+                "stichoza/google-translate-php": "~3.0",
+                "thru.io/active_record": ">=0.2"
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "fzaninotto/faker": "1.5.*@dev",
+                "thru.io/active_record_migrations": "dev-master"
+            },
+            "bin": [
+                "translator"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Thru\\Translation\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Thru\\Translation\\Test\\": "tests/"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "Support multi-lingual in YOUR application! :D",
+            "time": "2015-06-23 10:49:28"
+        },
+        {
+            "name": "thru.io/uuid",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Thruio/UUID.git",
+                "reference": "ab0e9d29a744fcb42826b7c78a7220fb3afdc2ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Thruio/UUID/zipball/ab0e9d29a744fcb42826b7c78a7220fb3afdc2ba",
+                "reference": "ab0e9d29a744fcb42826b7c78a7220fb3afdc2ba",
+                "shasum": ""
+            },
+            "require-dev": {
+                "codeclimate/php-test-reporter": "dev-master",
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Thru\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Matthew Baggett",
+                    "email": "matthew@baggett.me"
+                }
+            ],
+            "description": "A nice little library to interact with UUIDs",
+            "time": "2015-02-15 11:30:33"
+        },
+        {
+            "name": "zeuxisoo/slim-whoops",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zeuxisoo/php-slim-whoops.git",
+                "reference": "affca3f03ac36b2ae449894aed18843925b06d1e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zeuxisoo/php-slim-whoops/zipball/affca3f03ac36b2ae449894aed18843925b06d1e",
+                "reference": "affca3f03ac36b2ae449894aed18843925b06d1e",
+                "shasum": ""
+            },
+            "require": {
+                "filp/whoops": "1.*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "filp/whoops": "1.*",
+                "phpunit/phpunit": "3.7.*@dev",
+                "slim/slim": "2.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Zeuxisoo\\Whoops\\Provider\\Slim\\WhoopsMiddleware": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-2-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Zeuxis Lo",
+                    "email": "seekstudio@gmail.com",
+                    "homepage": "http://www.chair.im/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP whoops error on slim framework",
+            "homepage": "https://github.com/zeuxisoo/php-slim-whoops/",
+            "keywords": [
+                "error",
+                "exception",
+                "slim",
+                "whoops"
+            ],
+            "time": "2015-03-18 09:52:06"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "zeuxisoo/slim-whoops": 20,
+        "raveren/kint": 20,
+        "predis/predis": 20,
+        "thru.io/active_record_migrations": 20,
+        "thru.io/translation": 20,
+        "thru.io/session": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
