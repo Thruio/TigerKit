@@ -11,7 +11,7 @@ use TigerKit\TigerApp;
  * @var $user_id INTEGER
  * @var $username STRING
  * @var $displayname STRING
- * @var $password STRING(40)
+ * @var $password STRING(60)
  * @var $email STRING(320)
  * @var $created DATETIME
  * @var $updated DATETIME
@@ -46,12 +46,11 @@ class User extends ActiveRecord
 
   public function checkPassword($password)
   {
+    \Kint::dump($this);
     $passwordInfo = password_get_info($this->password);
-    $algo = $passwordInfo['algoName'];
-    $testHash = password_hash($password, $algo);
-    if ($testHash == $this->password) {
+    if (password_verify($password, $this->password)) {
       // success. But check for needing to be rehashed.
-      if (password_needs_rehash($this->password, $algo)) {
+      if (password_needs_rehash($this->password, $passwordInfo['algo'])) {
         $this->setPassword($password);
         TigerApp::log("Password for {$this->username} rehashed.");
       }
