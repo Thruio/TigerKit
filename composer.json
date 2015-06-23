@@ -35,7 +35,8 @@
     "thru.io/active_record": ">=0.2",
     "thru.io/active_record_migrations": "dev-master",
     "thru.io/translation": "dev-master",
-    "thru.io/session": "dev-master"
+    "thru.io/session": "dev-master",
+    "flynsarmy/slim-monolog": "~1.0"
   },
   "autoload"   : {
     "psr-4": {
