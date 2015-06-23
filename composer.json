@@ -27,7 +27,7 @@
     }
   ],
   "require": {
-    "slim/slim": "2.*",
+    "slim/slim": "~2.6",
     "filp/whoops": "1.*",
     "zeuxisoo/slim-whoops": "dev-master",
     "raveren/kint": "dev-master",

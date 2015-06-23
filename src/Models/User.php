@@ -1,5 +1,5 @@
 <?php
-namespace TenderBid\Models;
+namespace TigerKit\Models;
 
 use Slim\Log;
 use \Thru\ActiveRecord\ActiveRecord;
