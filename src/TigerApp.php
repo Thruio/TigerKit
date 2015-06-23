@@ -8,6 +8,8 @@ use Monolog\Logger;
 use Monolog\Handler as LogHandler;
 use Monolog\Formatter as LogFormatter;
 use Symfony\Component\Yaml\Yaml;
+use Thru\ActiveRecord;
+use Thru\Session\Session;
 
 class TigerApp
 {
@@ -17,14 +19,51 @@ class TigerApp
   private $slimApp;
   /** @var MonologWriter */
   private $logger;
+  /** @var Session */
+  private $session;
 
   // Store where the application was run() from
   private $appRoot;
+  private $appTree;
+  private $dbPool;
   private $config;
 
   static private $defaultConfig = [
     "Application Name" => "Tiger Starter App",
+    "Copyright" => "Your Name Here",
     "Debug Mode" => "On",
+    "Databases" => [
+      "Default" => [
+        "Type" => "Mysql",
+        "Host" => "localhost",
+        "Port" => 3306,
+        "Username" => "tiger",
+        "Password" => "tiger",
+        "Database" => "tiger",
+      ]
+    ],
+    "Caches" => [
+      "Default" => [
+        "Type" => "Redis",
+        "Host" => "localhost",
+        "Port" => 6379,
+        "Database" => 5,
+      ]
+    ]
+  ];
+
+  static private $defaultAppTree = [
+    "TopNav" => [
+      'Left' => [
+        ["Label" => "Home", "Url" => "/"],
+        ["Label" => "About", "Url" => "/about"],
+        ["Label" => "Github", "Url" => "https://github.com/Thruio/TigerSampleApp"],
+      ],
+      'Right' => [
+        ["Label" => "Login", "Url" => "/login"],
+        ["Label" => "Logout", "Url" => "/logout"],
+      ]
+    ]
   ];
 
   static public function run()
@@ -53,6 +92,53 @@ class TigerApp
   static public function AppRoot()
   {
     return self::$tigerApp->appRoot;
+  }
+
+  static public function WebDiskRoot(){
+    return str_replace("\\", "/", dirname($_SERVER['SCRIPT_FILENAME']));
+  }
+
+  static public function WebHost(){
+    return $_SERVER['HTTP_HOST'];
+  }
+
+  static public function WebPort(){
+    return $_SERVER['SERVER_PORT'];
+  }
+
+  static public function WebIsSSL(){
+    return self::WebPort()==443?true:false;
+  }
+
+  static public function WebRoot(){
+    return(self::WebIsSSL()?"https":"http") . "://" . self::WebHost() . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
+  }
+
+  static public function Config($key){
+    $indexes = explode(".", $key);
+    $configData = self::$tigerApp->config;
+    foreach($indexes as $index){
+      if(isset($configData[$index])) {
+        $configData = $configData[$index];
+      }else{
+        TigerApp::log("No such config index: {$key}");
+        return false;
+      }
+    }
+    return $configData;
+  }
+
+  static public function Tree($key){
+    $indexes = explode(".", $key);
+    $treeData = self::$tigerApp->appTree;
+    foreach($indexes as $index){
+      if(isset($treeData[$index])) {
+        $treeData = $treeData[$index];
+      }else{
+        throw new TigerException("No such tree node index: {$key}");
+      }
+    }
+    return $treeData;
   }
 
   static public function TemplatesRoot()
@@ -132,7 +218,7 @@ class TigerApp
   }
 
   /**
-   * @return Slim
+   * @return TigerApp
    */
   public function begin()
   {
@@ -145,6 +231,28 @@ class TigerApp
       ini_set("display_errors", 1);
     }
 
+    // TODO: Load app tree from yaml
+    $this->appTree = self::$defaultAppTree;
+
+    // Initialise databases
+    foreach(TigerApp::Config("Databases") as $name => $config){
+      #\Kint::dump($config);exit;
+      $this->dbPool[$name] = new ActiveRecord\DatabaseLayer(array(
+        'db_type'     => $config['Type'],
+        'db_hostname' => $config['Host'],
+        'db_port'     => $config['Port'],
+        'db_username' => $config['Username'],
+        'db_password' => $config['Password'],
+        'db_database' => $config['Database']
+      ));
+    }
+
+    // Initialise Redis Pool
+    // TODO: Write this.
+
+    // Initialise Session
+    $this->session = new Session();
+
     // Initialise slim app.
     $this->slimApp = new Slim(array(
       'templates.path' => self::TemplatesRoot(),
@@ -152,6 +260,11 @@ class TigerApp
       'log.enabled' => true,
     ));
 
+    // Set the View controller.
+    // TODO: Make this settable in the config or somewhere in the sample App
+    $this->slimApp->view(new TigerView());
+
+    // Add routes to slim
     $this->parseRoutes();
 
     return $this;
