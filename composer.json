@@ -37,13 +37,13 @@
     "thru.io/translation": "dev-master",
     "thru.io/session": "dev-master",
     "flynsarmy/slim-monolog": "~1.0",
-    "symfony/yaml": "2.6.6"
+    "symfony/yaml": "2.6.6",
+    "twbs/bootstrap": "3.3.5"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
     "codeclimate/php-test-reporter": "dev-master",
-    "fzaninotto/faker": "1.5.*@dev",
-    "leafo/scssphp": "0.0.12"
+    "fzaninotto/faker": "1.5.*@dev"
   },
   "autoload": {
     "psr-4": {
