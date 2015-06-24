@@ -1,0 +1,15 @@
+# .scrutinizer.yml
+
+filter:
+    excluded_paths:
+        - 'tests/*'
+checks:
+    php:
+        code_rating: true
+        duplication: true
+tools:
+    external_code_coverage: true
+    php_code_sniffer:
+        config:
+            standard: "PSR2" # Values: PSR1, PSR2, PEAR, Zend, WordPress, Drupal, TYPO3CMS
+
