@@ -15,7 +15,7 @@ class TigerApp
 {
   /** @var TigerApp */
   static private $tigerApp;
-  /** @var Slim */
+  /** @var TigerSlim */
   private $slimApp;
   /** @var MonologWriter */
   private $logger;
@@ -66,6 +66,9 @@ class TigerApp
     ]
   ];
 
+  /**
+   * @return TigerApp
+   */
   static public function run()
   {
     if(!defined('APP_ROOT')){
@@ -78,7 +81,7 @@ class TigerApp
 
     $instance = self::$tigerApp->begin();
 
-    $instance->execute();
+    return $instance;
   }
 
   static public function log($message, $level = Log::INFO)
@@ -101,11 +104,13 @@ class TigerApp
   }
 
   static public function WebHost(){
-    return $_SERVER['HTTP_HOST'];
+    return self::$tigerApp->slimApp->request()->getHost();
+    #return $_SERVER['HTTP_HOST'];
   }
 
   static public function WebPort(){
-    return $_SERVER['SERVER_PORT'];
+    return self::$tigerApp->slimApp->request()->getPort();
+    #return $_SERVER['SERVER_PORT'];
   }
 
   static public function WebIsSSL(){
@@ -157,7 +162,7 @@ class TigerApp
   }
 
   /**
-   * @return Slim
+   * @return TigerSlim
    */
   static public function getSlimApp(){
     return self::$tigerApp->slimApp;
@@ -165,7 +170,7 @@ class TigerApp
 
   private function parseConfig(){
     $configFile = "Default.yaml";
-    $configPath = "{$this->appRoot}/../config/{$configFile}";
+    $configPath = "{$this->appRoot}/config/{$configFile}";
 
     if(!file_exists($configPath)){
 
@@ -179,7 +184,7 @@ class TigerApp
         throw new TigerException("Cannot write to {$configPath}");
       }
     }
-    $this->config = Yaml::parse($configPath);
+    $this->config = Yaml::parse(file_get_contents($configPath));
   }
 
   /**
@@ -190,7 +195,7 @@ class TigerApp
     $loggerHandlers = [];
 
     // Set up file logger.
-    $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::AppRoot() . '/logs/' . date('Y-m-d') . '.log');
+    $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::AppRoot() . '/logs/' . date('Y-m-d') . '.log', null, null, 0664);
     $loggerHandlers[] = $fileLoggerHandler;
 
     // Set up Chrome Logger
@@ -256,7 +261,7 @@ class TigerApp
     $this->session = new Session();
 
     // Initialise slim app.
-    $this->slimApp = new Slim(array(
+    $this->slimApp = new TigerSlim(array(
       'templates.path' => self::TemplatesRoot(),
       'log.writer' => $this->logger,
       'log.enabled' => true,
@@ -272,8 +277,11 @@ class TigerApp
     return $this;
   }
 
-  public function execute(){
-    $this->slimApp->run();
+  public function invoke(){
+    return $this->slimApp->invoke();
   }
 
+  public function execute(){
+    return $this->slimApp->run();
+  }
 }

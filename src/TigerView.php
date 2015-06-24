@@ -36,7 +36,7 @@ class TigerView extends View
     $publicLocation = "cache/{$id}.css";
     $publicLocationOnDisk = TigerApp::AppRoot() . "/public/" . $publicLocation;
     file_put_contents($publicLocationOnDisk, $data);
-    chmod($publicLocationOnDisk, 664);
+    chmod($publicLocationOnDisk, 0664);
     $this->_css[] = $publicLocation;
     return $this;
   }

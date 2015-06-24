@@ -16,19 +16,23 @@ class TigerWebBaseTest extends \PHPUnit_Framework_TestCase {
   public function setUp()
   {
     $_SESSION = array();
-    $this->tiger = new TigerApp(APP_ROOT);
-    $this->slim = $this->tiger->getSlimApp();
+
+
   }
 
   /**
    * @param string $path
    * @return Response
    */
-  protected function doRequest($path = "/"){
+  protected function doRequest($method = "GET", $path = "/"){
     Environment::mock(array(
-      'PATH_INFO' => $path
-    ));
-    $response = $this->slim->invoke();
+      'PATH_INFO' => $path,
+      'REQUEST_METHOD' => $method
+     ));
+    $this->tiger = TigerApp::run();
+
+    $this->slim = $this->tiger->getSlimApp();
+    $response = $this->tiger->invoke();
 
     return $response;
   }
