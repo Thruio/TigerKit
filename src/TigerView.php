@@ -34,7 +34,9 @@ class TigerView extends View
     $data = file_get_contents(TigerApp::AppRoot() . "/" . $css);
     $id = md5($filename);
     $publicLocation = "cache/{$id}.css";
-    file_put_contents(TigerApp::AppRoot() . "/public/" . $publicLocation, $data);
+    $publicLocationOnDisk = TigerApp::AppRoot() . "/public/" . $publicLocation;
+    file_put_contents($publicLocationOnDisk, $data);
+    chmod($publicLocationOnDisk, 664);
     $this->_css[] = $publicLocation;
     return $this;
   }
