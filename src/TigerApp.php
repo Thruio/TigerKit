@@ -99,18 +99,12 @@ class TigerApp
     return self::$tigerApp->appRoot;
   }
 
-  static public function WebDiskRoot(){
-    return str_replace("\\", "/", dirname($_SERVER['SCRIPT_FILENAME']));
-  }
-
   static public function WebHost(){
     return self::$tigerApp->slimApp->request()->getHost();
-    #return $_SERVER['HTTP_HOST'];
   }
 
   static public function WebPort(){
     return self::$tigerApp->slimApp->request()->getPort();
-    #return $_SERVER['SERVER_PORT'];
   }
 
   static public function WebIsSSL(){
@@ -155,6 +149,14 @@ class TigerApp
   static public function TemplatesRoot()
   {
     return self::AppRoot() . "/templates/";
+  }
+
+  static public function PublicRoot(){
+    return self::AppRoot() . "/public/";
+  }
+
+  static public function PublicCacheRoot(){
+    return self::AppRoot() . "/public/cache/";
   }
 
   /**

@@ -8,7 +8,7 @@ use Slim\Http\Response;
 use TigerKit\TigerApp;
 use Faker;
 
-class TigerWebBaseTest extends \PHPUnit_Framework_TestCase {
+abstract class TigerWebBaseTest extends \PHPUnit_Framework_TestCase {
   /** @var TigerApp */
   private $tiger;
   /** @var Slim */
