@@ -114,7 +114,7 @@ class TigerApp
   }
 
   static public function WebRoot() {
-    return(self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
+    return(self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . (!in_array(self::WebPort(), [443,80])?':'.self::WebPort():'') . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
   }
 
   /**
