@@ -13,23 +13,23 @@ class TigerView extends View
 
   public function render($template, $data = NULL)
   {
-    if(!is_array($data)) {
+    if (!is_array($data)) {
       $data = (array)$data;
     }
-    if(isset($data['noWrapper'])){
+    if (isset($data['noWrapper'])) {
       return parent::render($template, $data);
-    }else{
+    }else {
       $data['view'] = $this;
       $data['template'] = $template;
       return parent::render("decorator/decorator.phtml", $data);
     }
   }
 
-  public function getCSS(){
+  public function getCSS() {
     return $this->_css;
   }
 
-  public function addCSS($css){
+  public function addCSS($css) {
     $filename = basename($css);
     $data = file_get_contents(TigerApp::AppRoot() . "/" . $css);
     $id = md5($filename);
@@ -41,70 +41,70 @@ class TigerView extends View
     return $this;
   }
 
-  public function getJS(){
+  public function getJS() {
     return $this->_js;
   }
 
-  public function addJS($js){
+  public function addJS($js) {
     $this->_js[] = $js;
     return $this;
   }
 
-  public function url($url){
+  public function url($url) {
     // Do not process absolute URLs.
-    if(strpos($url, '://') !== false){
+    if (strpos($url, '://') !== false) {
       return $url;
     }
 
     // Relative-to-root URLs...
-    if(substr($url, 0, 1) == '/' && substr($url, 1, 1) != '/'){
+    if (substr($url, 0, 1) == '/' && substr($url, 1, 1) != '/') {
       return $url;
     }
 
     // Remove excess slashes to the left of URL.
-    for($i = 0; $i <= 3; $i++){
-      $url = ltrim($url,"/");
+    for ($i = 0; $i <= 3; $i++) {
+      $url = ltrim($url, "/");
     }
 
     $url = ltrim($url);
     return TigerApp::WebRoot() . $url;
   }
 
-  public function link($url, $text, $options = null){
+  public function link($url, $text, $options = null) {
     $url = $this->url($url);
-    if(isset($options['classes'])){
+    if (isset($options['classes'])) {
       $classes = "class=\"" . implode(" ", $options['classes']) . "\"";
     }
-    return "<a " . (isset($classes)?$classes:null) . " href=\"{$url}\">{$text}</a>";
+    return "<a " . (isset($classes) ? $classes : null) . " href=\"{$url}\">{$text}</a>";
   }
 
-  public function l($url, $text, $options = null){
+  public function l($url, $text, $options = null) {
     return $this->link($url, $text, $options);
   }
 
-  public function getSiteTitle($decorate = true){
-    if($this->_page_title && $decorate){
+  public function getSiteTitle($decorate = true) {
+    if ($this->_page_title && $decorate) {
       return "{$this->_site_title} - {$this->_page_title}";
-    }else{
+    }else {
       return "{$this->_site_title}";
     }
   }
 
-  public function setSiteTitle($title){
+  public function setSiteTitle($title) {
     $this->_site_title = $title;
     return $this;
   }
 
-  public function setPageTitle($title){
+  public function setPageTitle($title) {
     $this->_page_title = $title;
     return $this;
   }
 
-  public function translate($string, $replacements = array()){
+  public function translate($string, $replacements = array()) {
     return Translation::getInstance()->translate($string, $replacements);
   }
 
-  public function t($string, $replacements = array()){
+  public function t($string, $replacements = array()) {
     return $this->translate($string, $replacements);
   }
 

@@ -3,12 +3,12 @@ namespace TigerKit;
 
 use Slim\Slim;
 
-class BaseController{
+class BaseController {
 
   /** @var Slim */
   protected $slim;
 
-  public function __construct(){
+  public function __construct() {
     $this->slim = TigerApp::getSlimApp();
   }
 }

@@ -3,7 +3,6 @@ namespace TigerKit;
 
 use Flynsarmy\SlimMonolog\Log\MonologWriter;
 use Slim\Log;
-use Slim\Slim;
 use Monolog\Logger;
 use Monolog\Handler as LogHandler;
 use Monolog\Formatter as LogFormatter;
@@ -71,7 +70,7 @@ class TigerApp
    */
   static public function run()
   {
-    if(!defined('APP_ROOT')){
+    if (!defined('APP_ROOT')) {
       die("APP_ROOT not defined. Are you not using bootstrap.php?");
     }
 
@@ -116,7 +115,7 @@ class TigerApp
   }
 
   /**
-   * @param $key
+   * @param string $key
    * @return string|array|false
    */
   static public function Config($key){
@@ -125,7 +124,7 @@ class TigerApp
     foreach($indexes as $index){
       if(isset($configData[$index])) {
         $configData = $configData[$index];
-      }else{
+      } else{
         TigerApp::log("No such config index: {$key}");
         return false;
       }
@@ -133,13 +132,13 @@ class TigerApp
     return $configData;
   }
 
-  static public function Tree($key){
+  static public function Tree($key) {
     $indexes = explode(".", $key);
     $treeData = self::$tigerApp->appTree;
-    foreach($indexes as $index){
-      if(isset($treeData[$index])) {
+    foreach ($indexes as $index) {
+      if (isset($treeData[$index])) {
         $treeData = $treeData[$index];
-      }else{
+      }else {
         throw new TigerException("No such tree node index: {$key}");
       }
     }
@@ -151,11 +150,11 @@ class TigerApp
     return self::AppRoot() . "/templates/";
   }
 
-  static public function PublicRoot(){
+  static public function PublicRoot() {
     return self::AppRoot() . "/public/";
   }
 
-  static public function PublicCacheRoot(){
+  static public function PublicCacheRoot() {
     return self::AppRoot() . "/public/cache/";
   }
 
@@ -174,28 +173,28 @@ class TigerApp
   /**
    * @return TigerSlim
    */
-  static public function getSlimApp(){
+  static public function getSlimApp() {
     return self::$tigerApp->slimApp;
   }
 
-  private function parseConfig(){
+  private function parseConfig() {
     $configFile = "Default.yaml";
 
-    if(getenv('HOST')){
+    if (getenv('HOST')) {
       $configFile = getenv('HOST') . ".yaml";
     }
 
     $configPath = "{$this->appRoot}/config/{$configFile}";
 
-    if(!file_exists($configPath)){
+    if (!file_exists($configPath)) {
 
-      if(!file_exists(dirname($configPath))){
-        if(!mkdir(dirname($configPath))){
+      if (!file_exists(dirname($configPath))) {
+        if (!mkdir(dirname($configPath))) {
           throw new TigerException("Cannot write to " . dirname($configPath));
         }
       }
       $success = file_put_contents($configPath, Yaml::dump(self::$defaultConfig));
-      if(!$success){
+      if (!$success) {
         throw new TigerException("Cannot write to {$configPath}");
       }
     }
@@ -233,7 +232,7 @@ class TigerApp
     return $logger;
   }
 
-  private function parseRoutes(){
+  private function parseRoutes() {
     $app = $this->slimApp;
     $routesFile = APP_ROOT . "/config/Routes.php";
     if(file_exists($routesFile)) {
@@ -250,7 +249,7 @@ class TigerApp
 
     $this->logger = $this->setupLogger();
 
-    if($this->config['Debug Mode'] == "On"){
+    if ($this->config['Debug Mode'] == "On") {
       error_reporting(E_ALL);
       ini_set("display_errors", 1);
     }
@@ -259,7 +258,7 @@ class TigerApp
     $this->appTree = self::$defaultAppTree;
 
     // Initialise databases
-    foreach(TigerApp::Config("Databases") as $name => $config){
+    foreach (TigerApp::Config("Databases") as $name => $config) {
       #\Kint::dump($config);exit;
       $this->dbPool[$name] = new ActiveRecord\DatabaseLayer(array(
         'db_type'     => $config['Type'],
@@ -294,11 +293,11 @@ class TigerApp
     return $this;
   }
 
-  public function invoke(){
+  public function invoke() {
     return $this->slimApp->invoke();
   }
 
-  public function execute(){
+  public function execute() {
     return $this->slimApp->run();
   }
 }
