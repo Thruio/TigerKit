@@ -68,10 +68,12 @@ class TigerApp
 
   static public function run()
   {
+    if(!defined(APP_ROOT)){
+      die("APP_ROOT not defined. Are you not using bootstrap.php?");
+    }
+
     if (!self::$tigerApp) {
-      $trace = debug_backtrace();
-      $appRoot = dirname($trace[0]['file']);
-      self::$tigerApp = new TigerApp($appRoot);
+      self::$tigerApp = new TigerApp(APP_ROOT);
     }
 
     $instance = self::$tigerApp->begin();
