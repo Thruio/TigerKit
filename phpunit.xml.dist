@@ -3,8 +3,8 @@
          colors="true"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="dummy">
-            <directory>tests/Dummy</directory>
+        <testsuite name="basic">
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
     <logging>
@@ -16,5 +16,8 @@
             <directory>vendor</directory>
             <directory>tests</directory>
         </blacklist>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+          <directory suffix=".php">src</directory>
+        </whitelist>
     </filter>
 </phpunit>

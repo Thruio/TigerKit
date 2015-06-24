@@ -1,6 +1,7 @@
 <?php
 namespace TigerKit\Test;
 
+use Slim\Environment;
 use TigerKit\TigerApp;
 
 class TigerAppTest extends \PHPUnit_Framework_TestCase {
@@ -34,6 +35,14 @@ class TigerAppTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testPathUtils(){
+    $requestParams = array(
+      'PATH_INFO' => "/",
+      'REQUEST_METHOD' => "GET",
+    );
+
+    Environment::mock($requestParams);
+
+    $this->assertEquals(APP_ROOT . "/logs/", TigerApp::LogRoot());
     $this->assertEquals(APP_ROOT . "/templates/", TigerApp::TemplatesRoot());
     #$this->assertEquals(APP_ROOT . "/templates", TigerApp::WebDiskRoot());
     $this->assertEquals(APP_ROOT . "/public/", TigerApp::PublicRoot());
@@ -44,8 +53,10 @@ class TigerAppTest extends \PHPUnit_Framework_TestCase {
   }
 
   public function testExecute(){
+    ob_start();
     TigerApp::run()
       ->begin()
       ->execute();
+    ob_end_clean();
   }
 }

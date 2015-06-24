@@ -159,6 +159,10 @@ class TigerApp
     return self::AppRoot() . "/public/cache/";
   }
 
+  static public function LogRoot(){
+    return self::AppRoot() . "/logs/";
+  }
+
   /**
    * @return MonologWriter
    */
@@ -206,7 +210,10 @@ class TigerApp
     $loggerHandlers = [];
 
     // Set up file logger.
-    $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::AppRoot() . '/logs/' . date('Y-m-d') . '.log', null, null, 0664);
+    if(!file_exists(TigerApp::LogRoot())){
+      mkdir(TigerApp::LogRoot(), 0777, true);
+    }
+    $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null, 0664);
     $loggerHandlers[] = $fileLoggerHandler;
 
     // Set up Chrome Logger
@@ -228,7 +235,10 @@ class TigerApp
 
   private function parseRoutes(){
     $app = $this->slimApp;
-    require(APP_ROOT . "/config/Routes.php");
+    $routesFile = APP_ROOT . "/config/Routes.php";
+    if(file_exists($routesFile)) {
+      require($routesFile);
+    }
   }
 
   /**
