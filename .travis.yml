@@ -1,0 +1,21 @@
+language: php
+
+php: 5.5
+
+before_script :
+  - composer install
+  - mysql -e 'create database tigerkitstarterapp;'
+  - mysql -e "use mysql; SET PASSWORD FOR 'travis'@'localhost' = PASSWORD('travis'); FLUSH PRIVILEGES;"
+
+after_script:
+  - CODECLIMATE_REPO_TOKEN="3489ebeb1a7edb7952d88c89e091671abac8560d7376517a4e10b9766baedc6c" vendor/bin/test-reporter --stdout > codeclimate.json
+  - "curl -X POST -d @codeclimate.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports"
+  - wget https://scrutinizer-ci.com/ocular.phar
+  - php ocular.phar code-coverage:upload --format=php-clover build/logs/clover.xml
+
+script: phpunit
+
+notifications:
+  email:
+    - matthew@baggett.me
+  slack: thruio:m7cGYXmdz261AkGDfiRVBHmY
