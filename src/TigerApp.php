@@ -121,6 +121,10 @@ class TigerApp
     return(self::WebIsSSL()?"https":"http") . "://" . self::WebHost() . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
   }
 
+  /**
+   * @param $key
+   * @return string|array|false
+   */
   static public function Config($key){
     $indexes = explode(".", $key);
     $configData = self::$tigerApp->config;
@@ -221,12 +225,8 @@ class TigerApp
   }
 
   private function parseRoutes(){
-    $routesPath = "{$this->appRoot}/config/Routes.php";
-    if(!file_exists($routesPath)){
-      throw new TigerException("Routes file {$routesPath} is missing.");
-    }
     $app = $this->slimApp;
-    require_once($routesPath);
+    require(APP_ROOT . "/config/Routes.php");
   }
 
   /**
