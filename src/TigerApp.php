@@ -68,7 +68,7 @@ class TigerApp
 
   static public function run()
   {
-    if(!defined(APP_ROOT)){
+    if(!defined('APP_ROOT')){
       die("APP_ROOT not defined. Are you not using bootstrap.php?");
     }
 
@@ -145,7 +145,7 @@ class TigerApp
 
   static public function TemplatesRoot()
   {
-    return self::AppRoot() . "/../templates/";
+    return self::AppRoot() . "/templates/";
   }
 
   /**
@@ -190,7 +190,7 @@ class TigerApp
     $loggerHandlers = [];
 
     // Set up file logger.
-    $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::AppRoot() . '/../logs/' . date('Y-m-d') . '.log');
+    $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::AppRoot() . '/logs/' . date('Y-m-d') . '.log');
     $loggerHandlers[] = $fileLoggerHandler;
 
     // Set up Chrome Logger
@@ -211,7 +211,7 @@ class TigerApp
   }
 
   private function parseRoutes(){
-    $routesPath = "{$this->appRoot}/../config/Routes.php";
+    $routesPath = "{$this->appRoot}/config/Routes.php";
     if(!file_exists($routesPath)){
       throw new TigerException("Routes file {$routesPath} is missing.");
     }

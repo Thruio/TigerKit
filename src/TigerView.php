@@ -31,10 +31,10 @@ class TigerView extends View
 
   public function addCSS($css){
     $filename = basename($css);
-    $data = file_get_contents(TigerApp::AppRoot() . "/../" . $css);
+    $data = file_get_contents(TigerApp::AppRoot() . "/" . $css);
     $id = md5($filename);
     $publicLocation = "cache/{$id}.css";
-    file_put_contents(TigerApp::AppRoot() . "/../public/" . $publicLocation, $data);
+    file_put_contents(TigerApp::AppRoot() . "/public/" . $publicLocation, $data);
     $this->_css[] = $publicLocation;
     return $this;
   }
