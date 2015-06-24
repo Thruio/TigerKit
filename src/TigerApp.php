@@ -170,6 +170,11 @@ class TigerApp
 
   private function parseConfig(){
     $configFile = "Default.yaml";
+
+    if(isset($_ENV['HOST'])){
+      $configFile = "{$_ENV['HOST']}.yaml";
+    }
+
     $configPath = "{$this->appRoot}/config/{$configFile}";
 
     if(!file_exists($configPath)){
