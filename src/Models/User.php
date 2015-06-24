@@ -56,7 +56,7 @@ class User extends ActiveRecord
         TigerApp::log("Password for {$this->username} rehashed.");
       }
       return true;
-    }else {
+    } else {
       return false;
     }
   }
@@ -65,7 +65,7 @@ class User extends ActiveRecord
   {
     if (self::getCurrent() instanceof User) {
       return false;
-    }else {
+    } else {
       header("Location: /login");
       exit;
     }

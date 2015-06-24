@@ -88,6 +88,9 @@ class TigerApp
     self::$tigerApp->getLogger()->write($message, $level);
   }
 
+  /**
+   * @param string $appRoot
+   */
   public function __construct($appRoot)
   {
     $this->appRoot = $appRoot;
@@ -98,33 +101,33 @@ class TigerApp
     return self::$tigerApp->appRoot;
   }
 
-  static public function WebHost(){
+  static public function WebHost() {
     return self::$tigerApp->slimApp->request()->getHost();
   }
 
-  static public function WebPort(){
+  static public function WebPort() {
     return self::$tigerApp->slimApp->request()->getPort();
   }
 
-  static public function WebIsSSL(){
-    return self::WebPort()==443?true:false;
+  static public function WebIsSSL() {
+    return self::WebPort() == 443 ? true : false;
   }
 
-  static public function WebRoot(){
-    return(self::WebIsSSL()?"https":"http") . "://" . self::WebHost() . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
+  static public function WebRoot() {
+    return(self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
   }
 
   /**
    * @param string $key
    * @return string|array|false
    */
-  static public function Config($key){
+  static public function Config($key) {
     $indexes = explode(".", $key);
     $configData = self::$tigerApp->config;
-    foreach($indexes as $index){
-      if(isset($configData[$index])) {
+    foreach ($indexes as $index) {
+      if (isset($configData[$index])) {
         $configData = $configData[$index];
-      } else{
+      }else {
         TigerApp::log("No such config index: {$key}");
         return false;
       }
@@ -138,7 +141,7 @@ class TigerApp
     foreach ($indexes as $index) {
       if (isset($treeData[$index])) {
         $treeData = $treeData[$index];
-      }else {
+      } else {
         throw new TigerException("No such tree node index: {$key}");
       }
     }
@@ -158,7 +161,7 @@ class TigerApp
     return self::AppRoot() . "/public/cache/";
   }
 
-  static public function LogRoot(){
+  static public function LogRoot() {
     return self::AppRoot() . "/logs/";
   }
 
@@ -209,7 +212,7 @@ class TigerApp
     $loggerHandlers = [];
 
     // Set up file logger.
-    if(!file_exists(TigerApp::LogRoot())){
+    if (!file_exists(TigerApp::LogRoot())) {
       mkdir(TigerApp::LogRoot(), 0777, true);
     }
     $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null, 0664);
@@ -235,7 +238,7 @@ class TigerApp
   private function parseRoutes() {
     $app = $this->slimApp;
     $routesFile = APP_ROOT . "/config/Routes.php";
-    if(file_exists($routesFile)) {
+    if (file_exists($routesFile)) {
       require($routesFile);
     }
   }

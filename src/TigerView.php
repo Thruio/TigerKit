@@ -18,7 +18,7 @@ class TigerView extends View
     }
     if (isset($data['noWrapper'])) {
       return parent::render($template, $data);
-    }else {
+    } else {
       $data['view'] = $this;
       $data['template'] = $template;
       return parent::render("decorator/decorator.phtml", $data);
@@ -85,7 +85,7 @@ class TigerView extends View
   public function getSiteTitle($decorate = true) {
     if ($this->_page_title && $decorate) {
       return "{$this->_site_title} - {$this->_page_title}";
-    }else {
+    } else {
       return "{$this->_site_title}";
     }
   }
