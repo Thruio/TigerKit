@@ -3,6 +3,7 @@ namespace TigerKit\Models;
 
 use Slim\Log;
 use \Thru\ActiveRecord\ActiveRecord;
+use Thru\Session\Session;
 use TigerKit\TigerApp;
 
 /**
@@ -76,9 +77,9 @@ class User extends ActiveRecord
    */
   static public function getCurrent()
   {
-    if (isset($_SESSION['user'])) {
-      if ($_SESSION['user'] instanceof User) {
-        return User::search()->where('user_id', $_SESSION['user']->user_id)->execOne();
+    if (Session::get('user')) {
+      if (Session::get('user') instanceof User) {
+        return User::search()->where('user_id', Session::get('user')->user_id)->execOne();
       }
     }
     return false;

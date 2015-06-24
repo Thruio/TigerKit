@@ -16,8 +16,6 @@ class TigerWebBaseTest extends \PHPUnit_Framework_TestCase {
   public function setUp()
   {
     $_SESSION = array();
-
-
   }
 
   /**
