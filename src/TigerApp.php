@@ -7,6 +7,7 @@ use Monolog\Logger;
 use Monolog\Handler as LogHandler;
 use Monolog\Formatter as LogFormatter;
 use Symfony\Component\Yaml\Yaml;
+use League\Flysystem;
 use Thru\ActiveRecord;
 use Thru\Session\Session;
 
@@ -25,6 +26,7 @@ class TigerApp
   private $appRoot;
   private $appTree;
   private $dbPool;
+  private $storagePool;
   private $config;
 
   static private $defaultConfig = [
@@ -47,6 +49,12 @@ class TigerApp
         "Host" => "localhost",
         "Port" => 6379,
         "Database" => 5,
+      ]
+    ],
+    "Storage" => [
+      "Default" => [
+        "Type" => "Zip",
+        "Location" => "Storage.zip"
       ]
     ]
   ];
@@ -180,6 +188,14 @@ class TigerApp
     return self::$tigerApp->slimApp;
   }
 
+  /**
+   * @param string $pool
+   * @return Flysystem\Filesystem
+   */
+  static public function getStorage($pool = 'Default'){
+    return self::$tigerApp->storagePool[$pool];
+  }
+
   private function parseConfig() {
     $configFile = "Default.yaml";
 
@@ -261,16 +277,33 @@ class TigerApp
     $this->appTree = self::$defaultAppTree;
 
     // Initialise databases
-    foreach (TigerApp::Config("Databases") as $name => $config) {
-      #\Kint::dump($config);exit;
-      $this->dbPool[$name] = new ActiveRecord\DatabaseLayer(array(
-        'db_type'     => $config['Type'],
-        'db_hostname' => $config['Host'],
-        'db_port'     => $config['Port'],
-        'db_username' => $config['Username'],
-        'db_password' => $config['Password'],
-        'db_database' => $config['Database']
-      ));
+    if(count(TigerApp::Config("Databases")) > 0) {
+      foreach (TigerApp::Config("Databases") as $name => $config) {
+        #\Kint::dump($config);exit;
+        $this->dbPool[$name] = new ActiveRecord\DatabaseLayer(array(
+          'db_type' => $config['Type'],
+          'db_hostname' => $config['Host'],
+          'db_port' => $config['Port'],
+          'db_username' => $config['Username'],
+          'db_password' => $config['Password'],
+          'db_database' => $config['Database']
+        ));
+      }
+    }
+
+    // Initialise Storage Pool
+    if(count(TigerApp::Config("Storage")) > 0) {
+      foreach (TigerApp::Config("Storage") as $name => $config) {
+        switch (strtolower($config['Type'])) {
+          case 'zip':
+            $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
+            break;
+          default:
+            throw new TigerException("Unsupported storage type: {$config['Type']}.");
+        }
+
+        $this->storagePool[$name] = new Flysystem\Filesystem($adaptor);
+      }
     }
 
     // Initialise Redis Pool

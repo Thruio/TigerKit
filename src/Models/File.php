@@ -13,7 +13,7 @@ use TigerKit\TigerApp;
  * @var $user_id INTEGER
  * @var $filename STRING
  * @var $filetype STRING
- * @var $size INTEGER
+ * @var $filesize INTEGER
  * @var $created DATETIME
  * @var $updated DATETIME
  */
@@ -25,7 +25,7 @@ class File extends ActiveRecord
   public $user_id;
   public $filename;
   public $filetype;
-  public $size;
+  public $filesize;
   public $created;
   public $updated;
 
@@ -42,9 +42,26 @@ class File extends ActiveRecord
   }
 
   static public function CreateFromUpload($uploadFile){
-    \Kint::dump($uploadFile);
+    $class = get_called_class();
+    /** @var File $object */
+    $object = new $class();
+    $object->filename = $uploadFile['name'];
+    $object->filetype = $uploadFile['type'];
+    $object->filesize = $uploadFile['size'];
+    $object->save();
 
-    exit;
+    $storage = TigerApp::getStorage();
+    $stream = fopen($uploadFile['tmp_name'], 'r');
+    $storage->putStream($object->filename, $stream);
+    return $object;
+  }
+
+  public function save($automatic_reload = true){
+    if(!$this->created){
+      $this->created = date("Y-m-d H:i:s");
+    }
+    $this->updated = date("Y-m-d H:i:s");
+    parent::save($automatic_reload);
   }
 
 
