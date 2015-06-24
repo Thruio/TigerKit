@@ -8,7 +8,7 @@ use TigerKit\TigerApp;
 
 /**
  * Class User
- * @package Tenderbid\Models
+ * @package TigerKit\Models
  * @var $user_id INTEGER
  * @var $username STRING
  * @var $displayname STRING
@@ -64,10 +64,9 @@ class User extends ActiveRecord
   static public function checkLoggedIn()
   {
     if (self::getCurrent() instanceof User) {
-      return false;
+      return true;
     } else {
-      header("Location: /login");
-      exit;
+      TigerApp::getSlimApp()->redirect("/login");
     }
   }
 

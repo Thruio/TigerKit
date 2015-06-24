@@ -39,7 +39,8 @@
     "flynsarmy/slim-monolog": "~1.0",
     "symfony/yaml": "2.6.6",
     "twbs/bootstrap": "3.3.5",
-    "leafo/lessphp": "0.4.0"
+    "leafo/lessphp": "0.4.0",
+    "league/flysystem": "~1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "*",
