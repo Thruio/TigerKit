@@ -47,7 +47,6 @@ class User extends ActiveRecord
 
   public function checkPassword($password)
   {
-    \Kint::dump($this);
     $passwordInfo = password_get_info($this->password);
     if (password_verify($password, $this->password)) {
       // success. But check for needing to be rehashed.
