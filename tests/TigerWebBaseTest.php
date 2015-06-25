@@ -8,26 +8,14 @@ use Slim\Http\Response;
 use TigerKit\TigerApp;
 use Faker;
 
-abstract class TigerWebBaseTest extends \PHPUnit_Framework_TestCase {
-  /** @var TigerApp */
-  private $tiger;
+abstract class TigerWebBaseTest extends TigerBaseTest {
+
   /** @var Slim */
   protected $slim;
-  /** @var Faker\Factory */
-  protected $faker;
 
   public function setUp()
   {
-    $this->tiger = TigerApp::run();
     parent::setUp();
-    $_SESSION = array();
-    $this->faker = Faker\Factory::create();
-    $this->faker->addProvider(new Faker\Provider\en_US\Person($this->faker));
-    $this->faker->addProvider(new Faker\Provider\en_US\Address($this->faker));
-    $this->faker->addProvider(new Faker\Provider\en_US\PhoneNumber($this->faker));
-    $this->faker->addProvider(new Faker\Provider\en_US\Company($this->faker));
-    $this->faker->addProvider(new Faker\Provider\Lorem($this->faker));
-    $this->faker->addProvider(new Faker\Provider\Internet($this->faker));
   }
 
   /**

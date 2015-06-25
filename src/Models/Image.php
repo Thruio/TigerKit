@@ -19,4 +19,17 @@ class Image extends File
   public $width;
   public $height;
 
+  /**
+   * @param $uploadFile
+   * @return Image
+   */
+  static public function CreateFromUpload($uploadFile){
+    /** @var Image $object */
+    $object = parent::CreateFromUpload($uploadFile);
+    $size = getimagesize($uploadFile['tmp_name']);
+    $object->width = $size[0];
+    $object->height = $size[1];
+    $object->save();
+    return $object;
+  }
 }

@@ -16,6 +16,7 @@ use TigerKit\TigerApp;
  * @var $filesize INTEGER
  * @var $created DATETIME
  * @var $updated DATETIME
+ * @var $deleted ENUM("Yes","No")
  */
 class File extends ActiveRecord
 {
@@ -28,6 +29,7 @@ class File extends ActiveRecord
   public $filesize;
   public $created;
   public $updated;
+  public $deleted = "No";
 
   protected $_user;
 
@@ -41,6 +43,10 @@ class File extends ActiveRecord
     return $this->_user;
   }
 
+  /**
+   * @param $uploadFile
+   * @return File
+   */
   static public function CreateFromUpload($uploadFile){
     $class = get_called_class();
     /** @var File $object */
@@ -50,10 +56,35 @@ class File extends ActiveRecord
     $object->filesize = $uploadFile['size'];
     $object->save();
 
-    $storage = TigerApp::getStorage();
     $stream = fopen($uploadFile['tmp_name'], 'r');
-    $storage->putStream($object->filename, $stream);
+    $object->putDataStream($stream);
     return $object;
+  }
+
+  public function getDataStream(){
+    $storage = TigerApp::getStorage();
+    return $storage->readStream($this->filename);
+  }
+
+  public function getData(){
+    $storage = TigerApp::getStorage();
+    return $storage->read($this->filename);
+  }
+
+  public function putDataStream($stream){
+    $storage = TigerApp::getStorage();
+    $success = $storage->putStream($this->filename, $stream);
+    $this->filesize = $storage->getSize($this->filename);
+    $this->save();
+    return $success;
+  }
+
+  public function putData($data){
+    $storage = TigerApp::getStorage();
+    $this->filesize = strlen($data);
+    $success = $storage->put($this->filename, $data);
+    $this->save();
+    return $success;
   }
 
   public function save($automatic_reload = true){
