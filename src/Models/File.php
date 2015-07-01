@@ -14,11 +14,8 @@ use TigerKit\TigerApp;
  * @var $filename STRING
  * @var $filetype STRING
  * @var $filesize INTEGER
- * @var $created DATETIME
- * @var $updated DATETIME
- * @var $deleted ENUM("Yes","No")
  */
-class File extends ActiveRecord
+class File extends UserRelatableObject
 {
   protected $_table = "files";
 
@@ -29,7 +26,6 @@ class File extends ActiveRecord
   public $filesize;
   public $created;
   public $updated;
-  public $deleted = "No";
 
   protected $_user;
 

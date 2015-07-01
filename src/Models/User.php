@@ -14,11 +14,9 @@ use TigerKit\TigerApp;
  * @var $displayname STRING
  * @var $password STRING(60)
  * @var $email STRING(320)
- * @var $created DATETIME
- * @var $updated DATETIME
  * @var $type ENUM("User","Admin")
  */
-class User extends ActiveRecord
+class User extends UserRelatableObject
 {
   protected $_table = "users";
 
@@ -27,8 +25,6 @@ class User extends ActiveRecord
   public $displayname;
   public $password;
   public $email;
-  public $created;
-  public $updated;
   public $type = "User";
 
   public function isAdmin()
@@ -86,12 +82,6 @@ class User extends ActiveRecord
 
   public function save($automatic_reload = true)
   {
-    if (!$this->created) {
-      $this->created = date("Y-m-d H:i:s");
-    }
-
-    $this->updated = date("Y-m-d H:i:s");
-
     if (!$this->user_id) {
       ActiveRecord::log(Log::ALERT, "New user created: {$this->username} / {$this->displayname} / {$this->email}");
     }
