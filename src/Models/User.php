@@ -46,7 +46,7 @@ class User extends UserRelatableObject
     $passwordInfo = password_get_info($this->password);
     if (password_verify($password, $this->password)) {
       // success. But check for needing to be rehashed.
-      if (password_needs_rehash($this->password, $passwordInfo['algo'])) {
+      if (password_needs_rehash($this->password, PASSWORD_DEFAULT)) {
         $this->setPassword($password);
         TigerApp::log("Password for {$this->username} rehashed.");
       }
@@ -61,7 +61,7 @@ class User extends UserRelatableObject
     if (self::getCurrent() instanceof User) {
       return true;
     } else {
-      TigerApp::getSlimApp()->redirect("/login");
+      TigerApp::getSlimApp()->response()->redirect("/login");
     }
   }
 
@@ -75,6 +75,16 @@ class User extends UserRelatableObject
         return User::search()->where('user_id', Session::get('user')->user_id)->execOne();
     }
     return false;
+  }
+
+  /**
+   * Set the current user.
+   * @param User $user
+   * @return bool
+   */
+  static public function setCurrent(User $user = null){
+    Session::set('user', $user);
+    return true;
   }
 
 

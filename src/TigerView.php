@@ -75,7 +75,7 @@ class TigerView extends View
     if (isset($options['classes'])) {
       $classes = "class=\"" . implode(" ", $options['classes']) . "\"";
     }
-    return "<a " . (isset($classes) ? $classes : null) . " href=\"{$url}\">{$text}</a>";
+    return "<a " . (isset($classes) ? $classes." " : null) . "href=\"{$url}\">{$text}</a>";
   }
 
   public function l($url, $text, $options = null) {

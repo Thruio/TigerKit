@@ -34,7 +34,9 @@ class File extends UserRelatableObject
    */
   public function getUser(){
     if(!$this->_user){
-      $this->_user = User::search()->where('user_id',$this->user_id)->execOne();
+      $this->_user = User::search()
+        ->where('user_id',$this->user_id)
+        ->execOne();
     }
     return $this->_user;
   }
@@ -82,14 +84,5 @@ class File extends UserRelatableObject
     $this->save();
     return $success;
   }
-
-  public function save($automatic_reload = true){
-    if(!$this->created){
-      $this->created = date("Y-m-d H:i:s");
-    }
-    $this->updated = date("Y-m-d H:i:s");
-    parent::save($automatic_reload);
-  }
-
 
 }

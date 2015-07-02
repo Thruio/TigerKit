@@ -33,7 +33,7 @@ class ImageService extends BaseService {
     $tagService = new TagService();
     $tag = $tagService->getTagByName($tagName);
     if(!$tag){
-      throw new TigerException("No such tag {$tagName}.");
+      throw new TigerException("No such tag '{$tagName}'.");
     }
     $imageTagLinks = Models\ImageTagLink::search()
       ->where('tag_id', $tag->tag_id)
@@ -65,11 +65,8 @@ class ImageService extends BaseService {
     if($user) {
       $imageTagLink->created_user = $user->user_id;
     }
-    if($imageTagLink->save()) {
-      return $imageTagLink;
-    }else{
-      return false;
-    }
+    $imageTagLink->save();
+    return $imageTagLink;
   }
 
   public function addTags($images, $tags, Models\User $user = null){

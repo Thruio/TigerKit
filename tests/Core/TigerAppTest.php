@@ -59,4 +59,43 @@ class TigerAppTest extends \PHPUnit_Framework_TestCase {
       ->execute();
     ob_end_clean();
   }
+
+  public function testGetStorage(){
+    $storage = TigerApp::getStorage();
+    $this->assertEquals('League\Flysystem\Filesystem', get_class($storage));
+  }
+
+  public function testParseConfig(){
+    TigerApp::run()->begin()->parseConfig(TigerApp::AppRoot() . "/config/Default.yaml");
+  }
+
+  public function testParseConfigDoesntExist(){
+    TigerApp::run()->begin()->parseConfig("/tmp/nochancebro/DoesntExist.yaml");
+    unlink("/tmp/nochancebro/DoesntExist.yaml");
+    rmdir("/tmp/nochancebro");
+  }
+
+  /**
+   * @expectedException \TigerKit\TigerException
+   * @expectedExceptionMessage Cannot write to /nochancebro
+   */
+  public function testParseConfigDirCannotExist(){
+    TigerApp::run()->begin()->parseConfig("/nochancebro/DoesntExist.yaml");
+  }
+
+  /**
+   * @expectedException \TigerKit\TigerException
+   * @expectedExceptionMessage Cannot write to /DoesntExist.yaml
+   */
+  public function testParseConfigFileCannotExist(){
+    TigerApp::run()->begin()->parseConfig("/DoesntExist.yaml");
+  }
+
+  /**
+   * @expectedException \TigerKit\TigerException
+   * @expectedExceptionMessage Unsupported storage type: notatype.
+   */
+  public function testSetupStorageBogusType(){
+    TigerApp::run()->begin()->setupStorage(['Type'=> 'notatype']);
+  }
 }

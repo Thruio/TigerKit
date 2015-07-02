@@ -78,10 +78,6 @@ class TigerApp
    */
   static public function run()
   {
-    if (!defined('APP_ROOT')) {
-      die("APP_ROOT not defined. Are you not using bootstrap.php?");
-    }
-
     if (!self::$tigerApp) {
       self::$tigerApp = new TigerApp(APP_ROOT);
     }
@@ -196,23 +192,15 @@ class TigerApp
     return self::$tigerApp->storagePool[$pool];
   }
 
-  private function parseConfig() {
-    $configFile = "Default.yaml";
-
-    if (getenv('HOST')) {
-      $configFile = getenv('HOST') . ".yaml";
-    }
-
-    $configPath = "{$this->appRoot}/config/{$configFile}";
-
+  public function parseConfig($configPath) {
     if (!file_exists($configPath)) {
 
       if (!file_exists(dirname($configPath))) {
-        if (!mkdir(dirname($configPath))) {
+        if (!@mkdir(dirname($configPath))) {
           throw new TigerException("Cannot write to " . dirname($configPath));
         }
       }
-      $success = file_put_contents($configPath, Yaml::dump(self::$defaultConfig));
+      $success = @file_put_contents($configPath, Yaml::dump(self::$defaultConfig));
       if (!$success) {
         throw new TigerException("Cannot write to {$configPath}");
       }
@@ -228,9 +216,6 @@ class TigerApp
     $loggerHandlers = [];
 
     // Set up file logger.
-    if (!file_exists(TigerApp::LogRoot())) {
-      mkdir(TigerApp::LogRoot(), 0777, true);
-    }
     $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null, 0664);
     $loggerHandlers[] = $fileLoggerHandler;
 
@@ -264,7 +249,8 @@ class TigerApp
    */
   public function begin()
   {
-    $this->parseConfig();
+    $configFile = (getenv('HOST')?getenv('HOST'):'Default') . '.yaml';
+    $this->parseConfig("{$this->appRoot}/config/{$configFile}");
 
     $this->logger = $this->setupLogger();
 
@@ -294,15 +280,7 @@ class TigerApp
     // Initialise Storage Pool
     if(count(TigerApp::Config("Storage")) > 0) {
       foreach (TigerApp::Config("Storage") as $name => $config) {
-        switch (strtolower($config['Type'])) {
-          case 'zip':
-            $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
-            break;
-          default:
-            throw new TigerException("Unsupported storage type: {$config['Type']}.");
-        }
-
-        $this->storagePool[$name] = new Flysystem\Filesystem($adaptor);
+        $this->storagePool[$name] = $this->setupStorage($config);
       }
     }
 
@@ -327,6 +305,18 @@ class TigerApp
     $this->parseRoutes();
 
     return $this;
+  }
+
+  public function setupStorage($config){
+    switch (strtolower($config['Type'])) {
+      case 'zip':
+        $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
+        break;
+      default:
+        throw new TigerException("Unsupported storage type: {$config['Type']}.");
+    }
+
+    return new Flysystem\Filesystem($adaptor);
   }
 
   public function invoke() {
