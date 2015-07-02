@@ -1,5 +1,5 @@
 <?php
-namespace TigerKit\Test;
+namespace TigerKit\Test\Core;
 
 use Slim\Environment;
 use TigerKit\TigerApp;

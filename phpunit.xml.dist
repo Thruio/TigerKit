@@ -3,9 +3,12 @@
          colors="true"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="basic">
-            <directory>tests</directory>
-        </testsuite>
+      <testsuite name="Core">
+        <directory>tests/Core</directory>
+      </testsuite>
+      <testsuite name="Services">
+        <directory>tests/Services</directory>
+      </testsuite>
     </testsuites>
     <logging>
         <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
