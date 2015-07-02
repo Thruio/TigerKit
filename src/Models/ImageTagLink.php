@@ -17,8 +17,5 @@ class ImageTagLink extends UserRelatableObject
   public $image_tag_id;
   public $tag_id;
   public $file_id;
-  public $created;
-  public $created_user;
-  public $updated;
   public $deleted = "No";
 }

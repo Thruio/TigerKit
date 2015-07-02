@@ -54,7 +54,7 @@ class TigerApp
     "Storage" => [
       "Default" => [
         "Type" => "Zip",
-        "Location" => "assets/datablob.zip"
+        "Location" => "datablob.zip"
       ]
     ]
   ];

@@ -91,7 +91,7 @@ class User extends UserRelatableObject
   public function save($automatic_reload = true)
   {
     if (!$this->user_id) {
-      ActiveRecord::log(Log::ALERT, "New user created: {$this->username} / {$this->displayname} / {$this->email}");
+      TigerApp::log(Log::ALERT, "New user created: {$this->username} / {$this->displayname} / {$this->email}");
     }
 
     return parent::save($automatic_reload);
