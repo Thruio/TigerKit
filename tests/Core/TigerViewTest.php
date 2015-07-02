@@ -13,6 +13,20 @@ class TigerViewTest extends \PHPUnit_Framework_TestCase {
   public function setUp(){
     TigerApp::run();
     $this->tigerView = new TigerView();
+    $this->rrmdir(TigerApp::AppRoot() . "/public/cache");
+  }
+
+  private function rrmdir($dir) {
+    if (is_dir($dir)) {
+      $objects = scandir($dir);
+      foreach ($objects as $object) {
+        if ($object != "." && $object != "..") {
+          if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+        }
+      }
+      reset($objects);
+      rmdir($dir);
+    }
   }
 
   public function testCssAndJS(){
