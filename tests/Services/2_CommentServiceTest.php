@@ -40,6 +40,7 @@ class CommentServiceTest extends TigerBaseTest {
   }
 
   public function testAddCommentToImage(){
+    $image = $this->imageService->getRandomImage();
     $comment = new Comment();
     $comment->comment = $this->faker->text(rand(100,500));
     $comment->created_user_id = $this->randomCommentPoolUser()->user_id;
