@@ -14,6 +14,7 @@ class TagService extends BaseService {
       ->where('name', $tagName)
       ->where('deleted', 'No')
       ->where('hidden', 'No')
+      ->order('sequence', 'DESC')
       ->execOne();
   }
 

@@ -145,10 +145,14 @@ class ImageServiceTest extends TigerBaseTest
     $this->assertEquals($this->testUser->user_id, $image->getUpdatedUser()->user_id);
   }
 
+  /**
+   * @depends testTagImages
+   */
   public function testGetImagesByTag(){
     $images = $this->imageService->getImagesByTag("test");
     $this->assertTrue(is_array($images));
     $this->assertTrue(end($images) instanceof Image);
+    \Kint::dump($images);
     $this->assertGreaterThanOrEqual(3, count($images));
   }
 

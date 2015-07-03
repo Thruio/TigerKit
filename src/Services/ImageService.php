@@ -96,4 +96,11 @@ class ImageService extends BaseService {
     }
     return $imageTagLinks;
   }
+
+  public function getRandomImage(){
+    return Models\Image::search()
+      ->where('deleted','No')
+      ->order('rand()')
+      ->execOne();
+  }
 }
