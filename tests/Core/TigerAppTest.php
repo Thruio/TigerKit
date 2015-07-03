@@ -30,10 +30,6 @@ class TigerAppTest extends \PHPUnit_Framework_TestCase {
     $this->assertTrue(is_array(TigerApp::Tree("TopNav.Whoops")));
   }
 
-  public function testAppRootNeeded(){
-    $this->markTestIncomplete("Do not know how to implement this test yet.");
-  }
-
   public function testPathUtils(){
     $requestParams = array(
       'PATH_INFO' => "/",
