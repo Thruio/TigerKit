@@ -66,6 +66,7 @@ class ImageService extends BaseService {
       $imageTagLink->created_user = $user->user_id;
     }
     $imageTagLink->save();
+    $tag->updatePopularityCount();
     return $imageTagLink;
   }
 

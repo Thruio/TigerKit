@@ -1,8 +1,8 @@
 <?php
 namespace TigerKit\Models;
 
-use SampleApp\Services\ImageService;
-use \Thru\ActiveRecord\ActiveRecord;
+use TigerKit\Services\ImageService;
+use Thru\ActiveRecord\ActiveRecord;
 
 /**
  * Class Tag
