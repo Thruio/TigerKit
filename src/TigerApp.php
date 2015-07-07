@@ -10,6 +10,7 @@ use Symfony\Component\Yaml\Yaml;
 use League\Flysystem;
 use Thru\ActiveRecord;
 use Thru\Session\Session;
+use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
 
 class TigerApp
 {
@@ -65,6 +66,7 @@ class TigerApp
         ["Label" => "Home", "Url" => "/"],
         ["Label" => "About", "Url" => "/about"],
         ["Label" => "Github", "Url" => "https://github.com/Thruio/TigerSampleApp"],
+        ["Label" => "Boards", "Url" => "/r/dashboard"],
       ],
       'Right' => [
         ["Label" => "Login", "Url" => "/login"],
@@ -296,6 +298,10 @@ class TigerApp
       'log.writer' => $this->logger,
       'log.enabled' => true,
     ));
+
+    // Set up whoops
+    //$this->slimApp->config('whoops.editor', 'phpstorm');
+    $this->slimApp->add(new WhoopsMiddleware());
 
     // Set the View controller.
     // TODO: Make this settable in the config or somewhere in the sample App
