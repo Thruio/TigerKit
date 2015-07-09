@@ -4,7 +4,7 @@ namespace TigerKit\Models;
 use \Thru\ActiveRecord\ActiveRecord;
 
 /**
- * Class Tag
+ * Class ImageCommentLink
  * @package TigerKit\Models
  * @var $image_comment_id INTEGER
  * @var $file_id INTEGER

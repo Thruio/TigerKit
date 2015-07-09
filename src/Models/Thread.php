@@ -5,21 +5,21 @@ use TigerKit\Services\ImageService;
 use Thru\ActiveRecord\ActiveRecord;
 
 /**
- * Class Board
+ * Class Thread
  * @package TigerKit\Models
- * @var $post_id INTEGER
+ * @var $thread_id INTEGER
  * @var $board_id INTEGER
  * @var $title VARCHAR(140)
- * @var $url TEXT
- * @var $body TEXT
+ * @var $url TEXT NULLABLE
+ * @var $body TEXT NULLABLE
  */
-class Post extends UserRelatableObject
+class Thread extends UserRelatableObject
 {
-    protected $_table = "posts";
+    protected $_table = "threads";
 
-    public $post_id;
+    public $thread_id;
     public $board_id;
     public $title;
-    public $url;
-    public $body;
+    public $url = '';
+    public $body = '';
 }

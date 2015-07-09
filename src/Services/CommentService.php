@@ -49,4 +49,19 @@ class CommentService extends BaseService
         }
         return Models\Comment::search()->where('comment_id', $comment_ids, 'IN')->exec();
     }
+
+    public function addCommentToThread(Models\Thread $thread, Models\User $user, $text)
+    {
+        $comment = new Models\Comment();
+        $comment->comment = $text;
+        $comment->created_user_id = $user->user_id;
+        $comment->save();
+
+        $threadCommentLink = new Models\ThreadCommentLink();
+        $threadCommentLink->comment_id = $comment->comment_id;
+        $threadCommentLink->thread_id = $thread->thread_id;
+        $threadCommentLink->save();
+
+        return $comment;
+    }
 }
