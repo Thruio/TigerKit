@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f0939b5ad2cc035cdb12187bff1780e",
+    "hash": "c14a5d7a5c56145c51e36d0262a84c78",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.0.6",
+            "version": "3.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "899ee8b74eedf87d70d2797cb4add7fe22940d51"
+                "reference": "0d0cd3866c7c2b8d95a26a2e047c46a2a16e1d3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/899ee8b74eedf87d70d2797cb4add7fe22940d51",
-                "reference": "899ee8b74eedf87d70d2797cb4add7fe22940d51",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/0d0cd3866c7c2b8d95a26a2e047c46a2a16e1d3e",
+                "reference": "0d0cd3866c7c2b8d95a26a2e047c46a2a16e1d3e",
                 "shasum": ""
             },
             "require": {
@@ -28,6 +28,7 @@
                 "php": ">=5.5"
             },
             "require-dev": {
+                "behat/behat": "~3.0",
                 "ext-dom": "*",
                 "ext-json": "*",
                 "ext-openssl": "*",
@@ -76,7 +77,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2015-06-24 23:29:34"
+            "time": "2015-07-07 19:54:50"
         },
         {
             "name": "dropbox/dropbox-sdk",
@@ -578,31 +579,27 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.4",
+            "version": "1.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "56862959b45131ad33e5a7727a25db19f2cf090b"
+                "reference": "e87d33ecc3a9fe2b1931856dc9921628f8c18cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/56862959b45131ad33e5a7727a25db19f2cf090b",
-                "reference": "56862959b45131ad33e5a7727a25db19f2cf090b",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/e87d33ecc3a9fe2b1931856dc9921628f8c18cd5",
+                "reference": "e87d33ecc3a9fe2b1931856dc9921628f8c18cd5",
                 "shasum": ""
             },
             "require": {
-                "ext-mbstring": "*",
                 "php": ">=5.4.0"
             },
             "require-dev": {
                 "ext-fileinfo": "*",
-                "league/phpunit-coverage-listener": "~1.1",
                 "mockery/mockery": "~0.9",
-                "phpspec/phpspec": "~2.0",
+                "phpspec/phpspec": "^2.2",
                 "phpspec/prophecy-phpunit": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "predis/predis": "~1.0",
-                "tedivm/stash": "~0.12.0"
+                "phpunit/phpunit": "~4.1"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -616,8 +613,7 @@
                 "league/flysystem-rackspace": "Allows you to use Rackspace Cloud Files",
                 "league/flysystem-sftp": "Allows you to use SFTP server storage via phpseclib",
                 "league/flysystem-webdav": "Allows you to use WebDAV storage",
-                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter",
-                "predis/predis": "Allows you to use Predis for caching"
+                "league/flysystem-ziparchive": "Allows you to use ZipArchive adapter"
             },
             "type": "library",
             "extra": {
@@ -640,10 +636,11 @@
                     "email": "info@frenky.net"
                 }
             ],
-            "description": "Many filesystems, one API.",
+            "description": "Filesystem abstraction: Many filesystems, one API.",
             "keywords": [
                 "Cloud Files",
                 "WebDAV",
+                "abstraction",
                 "aws",
                 "cloud",
                 "copy.com",
@@ -651,6 +648,7 @@
                 "file systems",
                 "files",
                 "filesystem",
+                "filesystems",
                 "ftp",
                 "rackspace",
                 "remote",
@@ -658,20 +656,20 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2015-06-07 21:27:37"
+            "time": "2015-07-08 20:43:57"
         },
         {
             "name": "league/flysystem-aws-s3-v3",
-            "version": "1.0.3",
+            "version": "1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem-aws-s3-v3.git",
-                "reference": "ca73c3339ef37de82b511ab9e5d693b56c6f8780"
+                "reference": "e8e27d07bba47d29ca064b5f9dd06273fbaf7f62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/ca73c3339ef37de82b511ab9e5d693b56c6f8780",
-                "reference": "ca73c3339ef37de82b511ab9e5d693b56c6f8780",
+                "url": "https://api.github.com/repos/thephpleague/flysystem-aws-s3-v3/zipball/e8e27d07bba47d29ca064b5f9dd06273fbaf7f62",
+                "reference": "e8e27d07bba47d29ca064b5f9dd06273fbaf7f62",
                 "shasum": ""
             },
             "require": {
@@ -705,7 +703,7 @@
                 }
             ],
             "description": "Flysystem adapter for the AWS S3 SDK v3.x",
-            "time": "2015-06-16 21:13:42"
+            "time": "2015-07-07 20:11:47"
         },
         {
             "name": "league/flysystem-dropbox",
@@ -983,16 +981,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/nrk/predis.git",
-                "reference": "c4c36cae7ab09bdeef7f85b1c3d55fe120aa1117"
+                "reference": "90bffb1a5ab3ff99a3b352eae81b5687b863f215"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nrk/predis/zipball/c4c36cae7ab09bdeef7f85b1c3d55fe120aa1117",
-                "reference": "c4c36cae7ab09bdeef7f85b1c3d55fe120aa1117",
+                "url": "https://api.github.com/repos/nrk/predis/zipball/90bffb1a5ab3ff99a3b352eae81b5687b863f215",
+                "reference": "90bffb1a5ab3ff99a3b352eae81b5687b863f215",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.2"
+                "php": ">=5.3.9"
             },
             "require-dev": {
                 "phpunit/phpunit": "~4.0"
@@ -1002,6 +1000,11 @@
                 "ext-phpiredis": "Allows faster serialization and deserialization of the Redis protocol"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "Predis\\": "src/"
@@ -1025,7 +1028,7 @@
                 "predis",
                 "redis"
             ],
-            "time": "2015-01-02 12:54:29"
+            "time": "2015-07-07 16:51:44"
         },
         {
             "name": "psr/http-message",
@@ -1120,12 +1123,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/raveren/kint.git",
-                "reference": "0cb1329798c85df500e4dfac607c5d6834c18431"
+                "reference": "f5f48fa101845671aa8596b40a49713ddefcc77d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/raveren/kint/zipball/0cb1329798c85df500e4dfac607c5d6834c18431",
-                "reference": "0cb1329798c85df500e4dfac607c5d6834c18431",
+                "url": "https://api.github.com/repos/raveren/kint/zipball/f5f48fa101845671aa8596b40a49713ddefcc77d",
+                "reference": "f5f48fa101845671aa8596b40a49713ddefcc77d",
                 "shasum": ""
             },
             "require": {
@@ -1163,20 +1166,20 @@
                 "kint",
                 "php"
             ],
-            "time": "2015-07-02 11:06:58"
+            "time": "2015-07-05 17:56:29"
         },
         {
             "name": "react/promise",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/promise.git",
-                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef"
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/promise/zipball/365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
-                "reference": "365fcee430dfa4ace1fbc75737ca60ceea7eeeef",
+                "url": "https://api.github.com/repos/reactphp/promise/zipball/3b6fca09c7d56321057fa8867c8dbe1abf648627",
+                "reference": "3b6fca09c7d56321057fa8867c8dbe1abf648627",
                 "shasum": ""
             },
             "require": {
@@ -1203,11 +1206,11 @@
             "authors": [
                 {
                     "name": "Jan Sorgalla",
-                    "email": "jsorgalla@googlemail.com"
+                    "email": "jsorgalla@gmail.com"
                 }
             ],
             "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "time": "2014-12-30 13:32:42"
+            "time": "2015-07-03 13:48:55"
         },
         {
             "name": "slim/slim",
@@ -1356,22 +1359,27 @@
         },
         {
             "name": "thru.io/active_record",
-            "version": "0.3.0",
+            "version": "0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Thruio/ActiveRecord.git",
-                "reference": "82ecaf1bbf6cba331066280d7f9360296e8adac5"
+                "reference": "cc1b68fc64b881609e6a1dbdeb7dcacc0b8e2f41"
             },
             "require": {
                 "thru.io/json-pretty-printer": "1.0.*",
                 "thru.io/uuid": "1.0"
             },
             "require-dev": {
+                "brianium/paratest": "dev-master",
                 "codeclimate/php-test-reporter": "dev-master",
+                "fiunchinho/phpunit-randomizer": "dev-master",
                 "fzaninotto/faker": "1.5.*@dev",
+                "johnkary/phpunit-speedtrap": "~1.0@dev",
+                "lstrojny/phpunit-clever-and-smart": "0.*",
                 "monolog/monolog": ">=1.6.0",
-                "phpunit/phpunit": "*",
-                "raveren/kint": "dev-master"
+                "phpunit/phpunit": ">=4.7",
+                "raveren/kint": "dev-master",
+                "squizlabs/php_codesniffer": "*"
             },
             "type": "library",
             "autoload": {
@@ -1391,7 +1399,7 @@
                 }
             ],
             "description": "An active-record like implementation",
-            "time": "2015-07-02 14:49:21"
+            "time": "2015-07-08 18:20:35"
         },
         {
             "name": "thru.io/active_record_migrations",
@@ -1399,7 +1407,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Thruio/ActiveRecordMigrations.git",
-                "reference": "80c8cddab1790d134b35debf0fff797cf6bd2bea"
+                "reference": "0bb97b0d5dc50ee7f0f64c9821fd2d20edcd7493"
             },
             "require": {
                 "nategood/commando": "*",
@@ -1432,7 +1440,7 @@
                 }
             ],
             "description": "Migrations for Active Record",
-            "time": "2015-07-02 14:54:01"
+            "time": "2015-07-02 15:29:31"
         },
         {
             "name": "thru.io/json-pretty-printer",
@@ -2363,16 +2371,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "2.3.4",
+            "version": "2.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "92408bb1968a81b3217a6fdf6c1a198da83caa35"
+                "reference": "1c330b1b6e1ea8fd15f2fbea46770576e366855c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/92408bb1968a81b3217a6fdf6c1a198da83caa35",
-                "reference": "92408bb1968a81b3217a6fdf6c1a198da83caa35",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/1c330b1b6e1ea8fd15f2fbea46770576e366855c",
+                "reference": "1c330b1b6e1ea8fd15f2fbea46770576e366855c",
                 "shasum": ""
             },
             "require": {
@@ -2414,7 +2422,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2015-06-11 15:55:48"
+            "time": "2015-07-04 05:41:32"
         },
         {
             "name": "satooshi/php-coveralls",

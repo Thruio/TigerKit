@@ -24,6 +24,8 @@ class CommentService extends BaseService {
    * @return Models\ImageCommentLink
    */
   public function addCommentToImage(Models\Comment $comment, Models\Image $image){
+    $comment->save();
+    $image->save();
     return $this->addCommentToFile($comment, $image);
   }
 
