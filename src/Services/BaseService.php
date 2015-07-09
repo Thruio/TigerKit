@@ -1,6 +1,7 @@
 <?php
 namespace TigerKit\Services;
 
-class BaseService {
+class BaseService
+{
 
 }

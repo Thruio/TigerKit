@@ -13,10 +13,10 @@ use \Thru\ActiveRecord\ActiveRecord;
  */
 class ImageCommentLink extends ActiveRecord
 {
-  protected $_table = "image_comment_links";
+    protected $_table = "image_comment_links";
 
-  public $image_comment_id;
-  public $file_id;
-  public $comment_id;
-  public $deleted = "No";
+    public $image_comment_id;
+    public $file_id;
+    public $comment_id;
+    public $deleted = "No";
 }

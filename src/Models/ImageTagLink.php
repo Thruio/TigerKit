@@ -12,10 +12,10 @@ use \Thru\ActiveRecord\ActiveRecord;
  */
 class ImageTagLink extends UserRelatableObject
 {
-  protected $_table = "image_tag_links";
+    protected $_table = "image_tag_links";
 
-  public $image_tag_id;
-  public $tag_id;
-  public $file_id;
-  public $deleted = "No";
+    public $image_tag_id;
+    public $tag_id;
+    public $file_id;
+    public $deleted = "No";
 }

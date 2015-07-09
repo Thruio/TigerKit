@@ -15,11 +15,11 @@ use Thru\ActiveRecord\ActiveRecord;
  */
 class Post extends UserRelatableObject
 {
-  protected $_table = "posts";
+    protected $_table = "posts";
 
-  public $post_id;
-  public $board_id;
-  public $title;
-  public $url;
-  public $body;
+    public $post_id;
+    public $board_id;
+    public $title;
+    public $url;
+    public $body;
 }

@@ -2,6 +2,7 @@
 
 namespace TigerKit;
 
-class TigerException extends \Exception {
+class TigerException extends \Exception
+{
 
 }

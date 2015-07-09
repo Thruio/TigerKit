@@ -13,9 +13,9 @@ use Thru\ActiveRecord\ActiveRecord;
  */
 class Comment extends UserRelatableObject
 {
-  protected $_table = "comments";
+    protected $_table = "comments";
 
-  public $comment_id;
-  public $comment;
-  public $child_of_comment_id;
+    public $comment_id;
+    public $comment;
+    public $child_of_comment_id;
 }

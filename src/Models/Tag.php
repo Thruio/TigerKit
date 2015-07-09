@@ -14,17 +14,18 @@ use Thru\ActiveRecord\ActiveRecord;
  */
 class Tag extends UserRelatableObject
 {
-  protected $_table = "tags";
+    protected $_table = "tags";
 
-  public $tag_id;
-  public $name;
-  public $popularity_count;
-  public $hidden = "No";
+    public $tag_id;
+    public $name;
+    public $popularity_count;
+    public $hidden = "No";
 
-  public function updatePopularityCount(){
-    $imageService = new ImageService();
-    $images = $imageService->getImagesByTag($this->name);
-    $this->popularity_count = count($images);
-    $this->save();
-  }
+    public function updatePopularityCount()
+    {
+        $imageService = new ImageService();
+        $images = $imageService->getImagesByTag($this->name);
+        $this->popularity_count = count($images);
+        $this->save();
+    }
 }
