@@ -168,7 +168,7 @@ class TigerApp
   }
 
   static public function LogRoot() {
-    return self::AppRoot() . "/logs/";
+    return self::AppRoot() . "/build/logs/";
   }
 
   /**
@@ -215,24 +215,23 @@ class TigerApp
    */
   private function setupLogger()
   {
-    $loggerHandlers = [];
-
     // Set up file logger.
     $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null, 0664);
-    $loggerHandlers[] = $fileLoggerHandler;
 
     // Set up Chrome Logger
     $chromeLoggerHandler = new LogHandler\ChromePHPHandler();
     $chromeLoggerHandler->setFormatter(new LogFormatter\ChromePHPFormatter());
-    $loggerHandlers[] = $chromeLoggerHandler;
 
     // Set up Slack Logger
     #$slackLoggerHandler = new LogHandler\SlackHandler(SLACK_TOKEN, SLACK_CHANNEL, SLACK_USER, null, null, Logger::DEBUG);
     #$slackLoggerHandler->setFormatter(new LogFormatter\LineFormatter());
-    #$loggerHandlers[] = $slackLoggerHandler;
 
     $logger = new MonologWriter(array(
-      'handlers' => $loggerHandlers,
+      'handlers' => [
+        $fileLoggerHandler,
+        $chromeLoggerHandler,
+        #$slackLoggerHandler,
+      ],
     ));
 
     return $logger;
