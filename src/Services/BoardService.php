@@ -22,6 +22,31 @@ class BoardService extends BaseService
     }
 
     /**
+     * Get Board by Name or Slug.
+     * @param $name
+     * @return Models\Board
+     */
+    public function getBoard($name)
+    {
+        $byName = Models\Board::search()
+          ->where('name', $name)
+          ->execOne();
+        $bySlug = Models\Board::getBySlug($name);
+        return $bySlug instanceof Models\Board ? $bySlug : $byName;
+    }
+
+    /**
+     * Get All Boards
+     * @return Models\Board[]
+     */
+    public function getBoards()
+    {
+        return Models\Board::search()
+          ->order('subscription_count', 'DESC')
+          ->exec();
+    }
+
+    /**
      * @param Models\Board $board
      * @param Models\User $user
      * @return Models\UserBoardLink
@@ -42,7 +67,10 @@ class BoardService extends BaseService
      */
     public function calculateSubscriptionCounts(Models\Board $board)
     {
-        $board->subscription_count = Models\UserBoardLink::search()->where("board_id", $board->board_id)->where('deleted', 'No')->count();
+        $board->subscription_count = Models\UserBoardLink::search()
+          ->where("board_id", $board->board_id)
+          ->where('deleted', 'No')
+          ->count();
         $board->save();
         return $board;
     }
