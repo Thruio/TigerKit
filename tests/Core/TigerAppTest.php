@@ -45,7 +45,7 @@ class TigerAppTest extends \PHPUnit_Framework_TestCase
 
         Environment::mock($requestParams);
 
-        $this->assertEquals(APP_ROOT . "/logs/", TigerApp::LogRoot());
+        $this->assertEquals(APP_ROOT . "/build/logs/", TigerApp::LogRoot());
         $this->assertEquals(APP_ROOT . "/templates/", TigerApp::TemplatesRoot());
       #$this->assertEquals(APP_ROOT . "/templates", TigerApp::WebDiskRoot());
         $this->assertEquals(APP_ROOT . "/public/", TigerApp::PublicRoot());
