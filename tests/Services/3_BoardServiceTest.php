@@ -24,9 +24,6 @@ class BoardServiceTest extends TigerBaseTest
     /** @var Models\User[] */
     private $boardUserPool;
 
-    private static $startTime;
-    private static $endTime;
-
     public function setUp()
     {
         parent::setUp();
@@ -37,18 +34,6 @@ class BoardServiceTest extends TigerBaseTest
         for ($i = 0; $i < 5; $i++) {
             $this->boardUserPool[] = $this->userService->createUser($this->faker->userName, $this->faker->name(), $this->faker->password, $this->faker->safeEmail);
         }
-    }
-    public static function setUpBeforeClass()
-    {
-        parent::setUpBeforeClass();
-        self::$startTime = microtime(true);
-    }
-
-    public static function tearDownAfterClass()
-    {
-        parent::tearDownAfterClass();
-        self::$endTime = microtime(true);
-        echo "Ran BoardServiceTest in " . number_format(self::$endTime - self::$startTime, 2) . " seconds\n";
     }
 
     /**
