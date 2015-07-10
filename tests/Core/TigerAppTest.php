@@ -2,9 +2,10 @@
 namespace TigerKit\Test\Core;
 
 use Slim\Environment;
+use TigerKit\Test\TigerBaseTest;
 use TigerKit\TigerApp;
 
-class TigerAppTest extends \PHPUnit_Framework_TestCase
+class TigerAppTest extends TigerBaseTest
 {
 
     public function setUp()

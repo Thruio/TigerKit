@@ -2,10 +2,11 @@
 namespace TigerKit\Test\Core;
 
 use Slim\Environment;
+use TigerKit\Test\TigerBaseTest;
 use TigerKit\TigerApp;
 use TigerKit\TigerView;
 
-class TigerViewTest extends \PHPUnit_Framework_TestCase
+class TigerViewTest extends TigerBaseTest
 {
 
   /** @var TigerView */

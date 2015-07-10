@@ -55,6 +55,24 @@ class BoardServiceTest extends TigerBaseTest
         $this->assertEquals($user, $board->getCreatedUser());
         return $board;
     }
+
+    /**
+     * @depends testCreateNewBoard
+     * @param Models\Board $board
+     */
+    public function testGetBoard(Models\Board $board)
+    {
+        $this->assertEquals($board->board_id, $this->boardService->getBoard($board->name)->board_id);
+    }
+
+    public function testGetBoards()
+    {
+        $boards = $this->boardService->getBoards();
+        $this->assertTrue(is_array($boards));
+        $this->assertGreaterThanOrEqual(1, count($boards));
+        $this->assertContainsOnlyInstancesOf("TigerKit\\Models\\Board", $boards);
+    }
+
     /**
      * @depends testCreateNewBoard
      * @param Models\Board $board
