@@ -5,6 +5,13 @@ use TigerKit\Models;
 
 class ThreadService extends BaseService
 {
+    /** @var $boardService BoardService */
+    public $boardService;
+
+    public function __construct()
+    {
+        $this->boardService = new BoardService();
+    }
 
     /**
      * @param Models\Board $board
@@ -25,6 +32,17 @@ class ThreadService extends BaseService
             $thread->body = $contentOrUrl;
         }
         $thread->save();
+        $this->boardService->calculateThreadCounts($board);
         return $thread;
+    }
+
+    /**
+     * @param Models\Board $board
+     * @return Models\Thread[]
+     */
+    public function getThreads(Models\Board $board)
+    {
+        $threads = Models\Thread::search()->where('board_id', $board->board_id)->where('deleted', 'No')->exec();
+        return $threads;
     }
 }

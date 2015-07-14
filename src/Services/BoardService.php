@@ -74,4 +74,18 @@ class BoardService extends BaseService
         $board->save();
         return $board;
     }
+
+    /**
+     * @param Models\Board $board
+     * @return Models\Board
+     */
+    public function calculateThreadCounts(Models\Board $board)
+    {
+        $board->thread_count = Models\Thread::search()
+          ->where("board_id", $board->board_id)
+          ->where('deleted', 'No')
+          ->count();
+        $board->save();
+        return $board;
+    }
 }
