@@ -49,6 +49,11 @@
   "require-dev": {
     "phpunit/phpunit": "*",
     "codeclimate/php-test-reporter": "dev-master",
+    "johnkary/phpunit-speedtrap": "~1.0@dev",
+    "lstrojny/phpunit-clever-and-smart": "0.*",
+    "brianium/paratest": "dev-master",
+    "fiunchinho/phpunit-randomizer": "dev-master",
+    "squizlabs/php_codesniffer": "*",
     "fzaninotto/faker": "1.5.*@dev"
   },
   "autoload": {
