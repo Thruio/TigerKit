@@ -2,12 +2,11 @@
 namespace TigerKit;
 
 use Flynsarmy\SlimMonolog\Log\MonologWriter;
-use Slim\Log;
-use Monolog\Logger;
-use Monolog\Handler as LogHandler;
-use Monolog\Formatter as LogFormatter;
-use Symfony\Component\Yaml\Yaml;
 use League\Flysystem;
+use Monolog\Formatter as LogFormatter;
+use Monolog\Handler as LogHandler;
+use Slim\Log;
+use Symfony\Component\Yaml\Yaml;
 use Thru\ActiveRecord;
 use Thru\Session\Session;
 use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
@@ -15,20 +14,20 @@ use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
 class TigerApp
 {
     /**
- * @var TigerApp 
-*/
+     * @var TigerApp
+     */
     static private $tigerApp;
     /**
- * @var TigerSlim 
-*/
+     * @var TigerSlim
+     */
     private $slimApp;
     /**
- * @var MonologWriter 
-*/
+     * @var MonologWriter
+     */
     private $logger;
     /**
- * @var Session 
-*/
+     * @var Session
+     */
     private $session;
 
     // Store where the application was run() from
@@ -39,53 +38,54 @@ class TigerApp
     private $config;
 
     static private $defaultConfig = [
-    "Application Name" => "Tiger Starter App",
-    "Copyright" => "Your Name Here",
-    "Debug Mode" => "On",
-    "Databases" => [
-      "Default" => [
-        "Type" => "Mysql",
-        "Host" => "localhost",
-        "Port" => 3306,
-        "Username" => "tiger",
-        "Password" => "tiger",
-        "Database" => "tiger",
+      "Application Name" => "Tiger Starter App",
+      "Copyright" => "Your Name Here",
+      "Debug Mode" => "On",
+      "Databases" => [
+        "Default" => [
+          "Type" => "Mysql",
+          "Host" => "localhost",
+          "Port" => 3306,
+          "Username" => "tiger",
+          "Password" => "tiger",
+          "Database" => "tiger",
+        ]
+      ],
+      "Caches" => [
+        "Default" => [
+          "Type" => "Redis",
+          "Host" => "localhost",
+          "Port" => 6379,
+          "Database" => 5,
+        ]
+      ],
+      "Storage" => [
+        "Default" => [
+          "Type" => "Zip",
+          "Location" => "datablob.zip"
+        ]
       ]
-    ],
-    "Caches" => [
-      "Default" => [
-        "Type" => "Redis",
-        "Host" => "localhost",
-        "Port" => 6379,
-        "Database" => 5,
-      ]
-    ],
-    "Storage" => [
-      "Default" => [
-        "Type" => "Zip",
-        "Location" => "datablob.zip"
-      ]
-    ]
     ];
 
     static private $defaultAppTree = [
-    "TopNav" => [
-      'Left' => [
-        ["Label" => "Home", "Url" => "/"],
-        ["Label" => "About", "Url" => "/about"],
-        ["Label" => "Github", "Url" => "https://github.com/Thruio/TigerSampleApp"],
-        ["Label" => "Boards", "Url" => "/r/dashboard"],
-      ],
-      'Right' => [
-        ["Label" => "Login", "Url" => "/login"],
-        ["Label" => "Logout", "Url" => "/logout"],
+      "TopNav" => [
+        'Left' => [
+          ["Label" => "Home", "Url" => "/"],
+          ["Label" => "About", "Url" => "/about"],
+          ["Label" => "Boards", "Url" => "/r/dashboard"],
+          ["Label" => "Image Gallery", "Url" => "/gallery"],
+          ["Label" => "Github", "Url" => "https://github.com/Thruio/TigerSampleApp"],
+        ],
+        'Right' => [
+          ["Label" => "Login", "Url" => "/login"],
+          ["Label" => "Logout", "Url" => "/logout"],
+        ]
       ]
-    ]
     ];
 
     /**
-   * @return TigerApp
-   */
+     * @return TigerApp
+     */
     public static function run()
     {
         if (!self::$tigerApp) {
@@ -103,8 +103,8 @@ class TigerApp
     }
 
     /**
-   * @param string $appRoot
-   */
+     * @param string $appRoot
+     */
     public function __construct($appRoot)
     {
         $this->appRoot = $appRoot;
@@ -132,13 +132,14 @@ class TigerApp
 
     public static function WebRoot()
     {
-        return(self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . (!in_array(self::WebPort(), [443,80])?':'.self::WebPort():'') . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
+        return (self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . (!in_array(self::WebPort(),
+          [443, 80]) ? ':' . self::WebPort() : '') . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
     }
 
     /**
-   * @param string $key
-   * @return string|array|false
-   */
+     * @param string $key
+     * @return string|array|false
+     */
     public static function Config($key)
     {
         $indexes = explode(".", $key);
@@ -148,9 +149,11 @@ class TigerApp
                 $configData = $configData[$index];
             } else {
                 TigerApp::log("No such config index: {$key}");
+
                 return false;
             }
         }
+
         return $configData;
     }
 
@@ -165,6 +168,7 @@ class TigerApp
                 throw new TigerException("No such tree node index: {$key}");
             }
         }
+
         return $treeData;
     }
 
@@ -189,25 +193,25 @@ class TigerApp
     }
 
     /**
-   * @return MonologWriter
-   */
+     * @return MonologWriter
+     */
     public function getLogger()
     {
         return $this->logger;
     }
 
     /**
-   * @return TigerSlim
-   */
+     * @return TigerSlim
+     */
     public static function getSlimApp()
     {
         return self::$tigerApp->slimApp;
     }
 
     /**
-   * @param string $pool
-   * @return Flysystem\Filesystem
-   */
+     * @param string $pool
+     * @return Flysystem\Filesystem
+     */
     public static function getStorage($pool = 'Default')
     {
         return self::$tigerApp->storagePool[$pool];
@@ -230,12 +234,13 @@ class TigerApp
     }
 
     /**
-   * @return MonologWriter
-   */
+     * @return MonologWriter
+     */
     private function setupLogger()
     {
         // Set up file logger.
-        $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null, 0664);
+        $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null,
+          0664);
 
         // Set up Chrome Logger
         $chromeLoggerHandler = new LogHandler\ChromePHPHandler();
@@ -246,13 +251,13 @@ class TigerApp
         // $slackLoggerHandler->setFormatter(new LogFormatter\LineFormatter());
 
         $logger = new MonologWriter(
-            array(
+          array(
             'handlers' => [
-            $fileLoggerHandler,
-            $chromeLoggerHandler,
-            // $slackLoggerHandler,
+              $fileLoggerHandler,
+              $chromeLoggerHandler,
+                // $slackLoggerHandler,
             ],
-            )
+          )
         );
 
         return $logger;
@@ -268,11 +273,11 @@ class TigerApp
     }
 
     /**
-   * @return TigerApp
-   */
+     * @return TigerApp
+     */
     public function begin()
     {
-        $configFile = (getenv('HOST')?getenv('HOST'):'Default') . '.yaml';
+        $configFile = (getenv('HOST') ? getenv('HOST') : 'Default') . '.yaml';
         $this->parseConfig("{$this->appRoot}/config/{$configFile}");
 
         $this->logger = $this->setupLogger();
@@ -288,28 +293,27 @@ class TigerApp
         // Initialise databases
         if (count(TigerApp::Config("Databases")) > 0) {
             foreach (TigerApp::Config("Databases") as $name => $settings) {
-                // \Kint::dump($config);exit;
                 $config = array();
 
                 $config['db_type'] = $settings['Type'];
-                if(isset($settings['Host'])) {
+                if (isset($settings['Host'])) {
                     $config['db_hostname'] = $settings['Host'];
                 }
-                if(isset($settings['Port'])) {
+                if (isset($settings['Port'])) {
                     $config['db_port'] = $settings['Port'];
                 }
-                if(isset($settings['Username'])) {
+                if (isset($settings['Username'])) {
                     $config['db_username'] = $settings['Username'];
                 }
-                if(isset($settings['Password'])) {
+                if (isset($settings['Password'])) {
                     $config['db_password'] = $settings['Password'];
                 }
-                if(isset($settings['Database'])) {
+                if (isset($settings['Database'])) {
                     $config['db_database'] = $settings['Database'];
                 }
 
                 // Sqlite-specific
-                if(isset($settings['File'])) {
+                if (isset($settings['File'])) {
                     $config['db_file'] = $settings['File'];
                 }
 
@@ -332,11 +336,11 @@ class TigerApp
 
         // Initialise slim app.
         $this->slimApp = new TigerSlim(
-            array(
+          array(
             'templates.path' => self::TemplatesRoot(),
             'log.writer' => $this->logger,
             'log.enabled' => true,
-            )
+          )
         );
 
         // Set up whoops
@@ -356,11 +360,11 @@ class TigerApp
     public function setupStorage($config)
     {
         switch (strtolower($config['Type'])) {
-        case 'zip':
-            $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
-            break;
-        default:
-            throw new TigerException("Unsupported storage type: {$config['Type']}.");
+            case 'zip':
+                $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
+                break;
+            default:
+                throw new TigerException("Unsupported storage type: {$config['Type']}.");
         }
 
         return new Flysystem\Filesystem($adaptor);
