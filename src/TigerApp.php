@@ -277,16 +277,33 @@ class TigerApp
 
       // Initialise databases
         if (count(TigerApp::Config("Databases")) > 0) {
-            foreach (TigerApp::Config("Databases") as $name => $config) {
+            foreach (TigerApp::Config("Databases") as $name => $settings) {
               #\Kint::dump($config);exit;
-                $this->dbPool[$name] = new ActiveRecord\DatabaseLayer(array(
-                'db_type' => $config['Type'],
-                'db_hostname' => $config['Host'],
-                'db_port' => $config['Port'],
-                'db_username' => $config['Username'],
-                'db_password' => $config['Password'],
-                'db_database' => $config['Database']
-                ));
+                $config = array();
+
+                $config['db_type'] = $settings['Type'];
+                if(isset($settings['Host'])) {
+                    $config['db_hostname'] = $settings['Host'];
+                }
+                if(isset($settings['Port'])) {
+                    $config['db_port'] = $settings['Port'];
+                }
+                if(isset($settings['Username'])) {
+                    $config['db_username'] = $settings['Username'];
+                }
+                if(isset($settings['Password'])) {
+                    $config['db_password'] = $settings['Password'];
+                }
+                if(isset($settings['Database'])) {
+                    $config['db_database'] = $settings['Database'];
+                }
+
+                // Sqlite-specific
+                if(isset($settings['File'])) {
+                    $config['db_file'] = $settings['File'];
+                }
+
+                $this->dbPool[$name] = new ActiveRecord\DatabaseLayer($config);
             }
         }
 
