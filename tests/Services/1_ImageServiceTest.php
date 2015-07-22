@@ -13,7 +13,9 @@ use TigerKit\Test\TigerBaseTest;
 class ImageServiceTest extends TigerBaseTest
 {
 
-  /** @var ImageService */
+    /**
+ * @var ImageService 
+*/
     private $imageService;
 
     public function setUp()
@@ -63,7 +65,7 @@ class ImageServiceTest extends TigerBaseTest
 
     }
 
-  /**
+    /**
    * @depends testUploadImage
    */
     public function testRetrieveImageData(Image $image)
@@ -72,7 +74,7 @@ class ImageServiceTest extends TigerBaseTest
         $this->assertEquals($image->filesize, strlen($data));
     }
 
-  /**
+    /**
    * @depends testUploadImage
    */
     public function testRetrieveImageDataStream(Image $image)
@@ -82,7 +84,7 @@ class ImageServiceTest extends TigerBaseTest
         $this->assertEquals($image->filesize, strlen($data));
     }
 
-  /**
+    /**
    * @depends testUploadImage
    */
     public function testReplaceImageData(Image $image)
@@ -93,7 +95,7 @@ class ImageServiceTest extends TigerBaseTest
         return $image;
     }
 
-  /**
+    /**
    * @depends testReplaceImageData
    */
     public function testReplaceImageDataStream(Image $image)
@@ -151,7 +153,7 @@ class ImageServiceTest extends TigerBaseTest
         $this->assertEquals($this->testUser->user_id, $image->getUpdatedUser()->user_id);
     }
 
-  /**
+    /**
    * @depends testTagImages
    */
     public function testGetImagesByTag()
@@ -162,7 +164,7 @@ class ImageServiceTest extends TigerBaseTest
         $this->assertGreaterThanOrEqual(3, count($images));
     }
 
-  /**
+    /**
    * @expectedException \TigerKit\TigerException
    * @expectedExceptionMessage No such tag 'bogus'.
    */
@@ -175,7 +177,9 @@ class ImageServiceTest extends TigerBaseTest
     {
         $userService = new UserService();
         $user = $userService->createUser("test", "test", "test", "test@example.com");
-      /** @var Image $image */
+        /**
+ * @var Image $image 
+*/
         $image = new Image();
         $image->user_id = $user->user_id;
         $this->assertTrue($image->getUser() instanceof User);

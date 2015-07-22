@@ -6,7 +6,7 @@ use TigerKit\Models;
 class TagService extends BaseService
 {
 
-  /**
+    /**
    * @param $tagName
    * @return false|Models\Tag
    */

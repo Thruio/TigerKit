@@ -5,7 +5,9 @@ use TigerKit\Models;
 
 class ThreadService extends BaseService
 {
-    /** @var $boardService BoardService */
+    /**
+ * @var $boardService BoardService 
+*/
     public $boardService;
 
     public function __construct()
@@ -15,7 +17,7 @@ class ThreadService extends BaseService
 
     /**
      * @param Models\Board $board
-     * @param Models\User $user
+     * @param Models\User  $user
      * @param $title
      * @param $contentOrUrl
      * @return Models\Thread

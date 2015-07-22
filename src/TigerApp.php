@@ -14,16 +14,24 @@ use Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware;
 
 class TigerApp
 {
-  /** @var TigerApp */
+    /**
+ * @var TigerApp 
+*/
     static private $tigerApp;
-  /** @var TigerSlim */
+    /**
+ * @var TigerSlim 
+*/
     private $slimApp;
-  /** @var MonologWriter */
+    /**
+ * @var MonologWriter 
+*/
     private $logger;
-  /** @var Session */
+    /**
+ * @var Session 
+*/
     private $session;
 
-  // Store where the application was run() from
+    // Store where the application was run() from
     private $appRoot;
     private $appTree;
     private $dbPool;
@@ -75,7 +83,7 @@ class TigerApp
     ]
     ];
 
-  /**
+    /**
    * @return TigerApp
    */
     public static function run()
@@ -94,7 +102,7 @@ class TigerApp
         self::$tigerApp->getLogger()->write($message, $level);
     }
 
-  /**
+    /**
    * @param string $appRoot
    */
     public function __construct($appRoot)
@@ -127,7 +135,7 @@ class TigerApp
         return(self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . (!in_array(self::WebPort(), [443,80])?':'.self::WebPort():'') . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
     }
 
-  /**
+    /**
    * @param string $key
    * @return string|array|false
    */
@@ -180,7 +188,7 @@ class TigerApp
         return self::AppRoot() . "/build/logs/";
     }
 
-  /**
+    /**
    * @return MonologWriter
    */
     public function getLogger()
@@ -188,7 +196,7 @@ class TigerApp
         return $this->logger;
     }
 
-  /**
+    /**
    * @return TigerSlim
    */
     public static function getSlimApp()
@@ -196,7 +204,7 @@ class TigerApp
         return self::$tigerApp->slimApp;
     }
 
-  /**
+    /**
    * @param string $pool
    * @return Flysystem\Filesystem
    */
@@ -221,29 +229,31 @@ class TigerApp
         $this->config = Yaml::parse(file_get_contents($configPath));
     }
 
-  /**
+    /**
    * @return MonologWriter
    */
     private function setupLogger()
     {
-      // Set up file logger.
+        // Set up file logger.
         $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null, 0664);
 
-      // Set up Chrome Logger
+        // Set up Chrome Logger
         $chromeLoggerHandler = new LogHandler\ChromePHPHandler();
         $chromeLoggerHandler->setFormatter(new LogFormatter\ChromePHPFormatter());
 
-      // Set up Slack Logger
-      #$slackLoggerHandler = new LogHandler\SlackHandler(SLACK_TOKEN, SLACK_CHANNEL, SLACK_USER, null, null, Logger::DEBUG);
-      #$slackLoggerHandler->setFormatter(new LogFormatter\LineFormatter());
+        // Set up Slack Logger
+        // $slackLoggerHandler = new LogHandler\SlackHandler(SLACK_TOKEN, SLACK_CHANNEL, SLACK_USER, null, null, Logger::DEBUG);
+        // $slackLoggerHandler->setFormatter(new LogFormatter\LineFormatter());
 
-        $logger = new MonologWriter(array(
-        'handlers' => [
-        $fileLoggerHandler,
-        $chromeLoggerHandler,
-        #$slackLoggerHandler,
-        ],
-        ));
+        $logger = new MonologWriter(
+            array(
+            'handlers' => [
+            $fileLoggerHandler,
+            $chromeLoggerHandler,
+            // $slackLoggerHandler,
+            ],
+            )
+        );
 
         return $logger;
     }
@@ -253,11 +263,11 @@ class TigerApp
         $app = $this->slimApp;
         $routesFile = APP_ROOT . "/config/Routes.php";
         if (file_exists($routesFile)) {
-            require($routesFile);
+            include $routesFile;
         }
     }
 
-  /**
+    /**
    * @return TigerApp
    */
     public function begin()
@@ -272,13 +282,13 @@ class TigerApp
             ini_set("display_errors", 1);
         }
 
-      // TODO: Load app tree from yaml
+        // TODO: Load app tree from yaml
         $this->appTree = self::$defaultAppTree;
 
-      // Initialise databases
+        // Initialise databases
         if (count(TigerApp::Config("Databases")) > 0) {
             foreach (TigerApp::Config("Databases") as $name => $settings) {
-              #\Kint::dump($config);exit;
+                // \Kint::dump($config);exit;
                 $config = array();
 
                 $config['db_type'] = $settings['Type'];
@@ -307,35 +317,37 @@ class TigerApp
             }
         }
 
-      // Initialise Storage Pool
+        // Initialise Storage Pool
         if (count(TigerApp::Config("Storage")) > 0) {
             foreach (TigerApp::Config("Storage") as $name => $config) {
                 $this->storagePool[$name] = $this->setupStorage($config);
             }
         }
 
-      // Initialise Redis Pool
-      // TODO: Write this.
+        // Initialise Redis Pool
+        // TODO: Write this.
 
-      // Initialise Session
+        // Initialise Session
         $this->session = new Session();
 
-      // Initialise slim app.
-        $this->slimApp = new TigerSlim(array(
-        'templates.path' => self::TemplatesRoot(),
-        'log.writer' => $this->logger,
-        'log.enabled' => true,
-        ));
+        // Initialise slim app.
+        $this->slimApp = new TigerSlim(
+            array(
+            'templates.path' => self::TemplatesRoot(),
+            'log.writer' => $this->logger,
+            'log.enabled' => true,
+            )
+        );
 
-      // Set up whoops
-      //$this->slimApp->config('whoops.editor', 'phpstorm');
+        // Set up whoops
+        //$this->slimApp->config('whoops.editor', 'phpstorm');
         $this->slimApp->add(new WhoopsMiddleware());
 
-      // Set the View controller.
-      // TODO: Make this settable in the config or somewhere in the sample App
+        // Set the View controller.
+        // TODO: Make this settable in the config or somewhere in the sample App
         $this->slimApp->view(new TigerView());
 
-      // Add routes to slim
+        // Add routes to slim
         $this->parseRoutes();
 
         return $this;
@@ -344,11 +356,11 @@ class TigerApp
     public function setupStorage($config)
     {
         switch (strtolower($config['Type'])) {
-            case 'zip':
-                $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
-                break;
-            default:
-                throw new TigerException("Unsupported storage type: {$config['Type']}.");
+        case 'zip':
+            $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
+            break;
+        default:
+            throw new TigerException("Unsupported storage type: {$config['Type']}.");
         }
 
         return new Flysystem\Filesystem($adaptor);

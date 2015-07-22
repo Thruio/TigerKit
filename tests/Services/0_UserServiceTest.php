@@ -8,7 +8,9 @@ use TigerKit\Test\TigerBaseTest;
 
 class UserServiceTest extends TigerBaseTest
 {
-  /** @var UserService */
+    /**
+ * @var UserService 
+*/
     private $userService;
 
     public function setUp()

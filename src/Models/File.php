@@ -29,27 +29,29 @@ class File extends UserRelatableObject
 
     protected $_user;
 
-  /**
+    /**
    * @return User|false
    */
     public function getUser()
     {
         if (!$this->_user) {
             $this->_user = User::search()
-            ->where('user_id', $this->user_id)
-            ->execOne();
+                ->where('user_id', $this->user_id)
+                ->execOne();
         }
         return $this->_user;
     }
 
-  /**
+    /**
    * @param $uploadFile
    * @return File
    */
     public static function CreateFromUpload($uploadFile)
     {
         $class = get_called_class();
-      /** @var File $object */
+        /**
+ * @var File $object 
+*/
         $object = new $class();
         $object->filename = $uploadFile['name'];
         $object->filetype = $uploadFile['type'];

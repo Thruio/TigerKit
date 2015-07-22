@@ -12,16 +12,26 @@ use TigerKit\Test\TigerBaseTest;
 
 class BoardServiceTest extends TigerBaseTest
 {
-    /** @var BoardService */
+    /**
+ * @var BoardService 
+*/
     private $boardService;
-    /** @var ThreadService */
+    /**
+ * @var ThreadService 
+*/
     private $threadService;
-    /** @var UserService */
+    /**
+ * @var UserService 
+*/
     private $userService;
-    /** @var CommentService */
+    /**
+ * @var CommentService 
+*/
     private $commentService;
 
-    /** @var Models\User[] */
+    /**
+ * @var Models\User[] 
+*/
     private $boardUserPool;
 
     public function setUp()
@@ -129,7 +139,9 @@ class BoardServiceTest extends TigerBaseTest
     {
         foreach ($comments as $threadId => $commentsInThread) {
             foreach ($commentsInThread as $comment) {
-                /** @var $comment Models\Comment */
+                /**
+ * @var $comment Models\Comment 
+*/
                 $this->assertTrue($comment instanceof Models\Comment);
             }
         }

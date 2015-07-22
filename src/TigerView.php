@@ -60,17 +60,17 @@ class TigerView extends View
 
     public function url($url)
     {
-      // Do not process absolute URLs.
+        // Do not process absolute URLs.
         if (strpos($url, '://') !== false) {
             return $url;
         }
 
-      // Relative-to-root URLs...
+        // Relative-to-root URLs...
         if (substr($url, 0, 1) == '/' && substr($url, 1, 1) != '/') {
             return $url;
         }
 
-      // Remove excess slashes to the left of URL.
+        // Remove excess slashes to the left of URL.
         for ($i = 0; $i <= 3; $i++) {
             $url = ltrim($url, "/");
         }

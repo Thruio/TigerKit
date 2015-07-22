@@ -28,7 +28,7 @@ class TigerAppTest extends TigerBaseTest
         $this->assertTrue(is_array(TigerApp::Tree("TopNav.Left")));
     }
 
-  /**
+    /**
    * @expectedException \TigerKit\TigerException
    * @expectedExceptionMessage No such tree node index: TopNav.Whoops
    */
@@ -48,7 +48,7 @@ class TigerAppTest extends TigerBaseTest
 
         $this->assertEquals(APP_ROOT . "/build/logs/", TigerApp::LogRoot());
         $this->assertEquals(APP_ROOT . "/templates/", TigerApp::TemplatesRoot());
-      #$this->assertEquals(APP_ROOT . "/templates", TigerApp::WebDiskRoot());
+        // $this->assertEquals(APP_ROOT . "/templates", TigerApp::WebDiskRoot());
         $this->assertEquals(APP_ROOT . "/public/", TigerApp::PublicRoot());
         $this->assertEquals(APP_ROOT . "/public/cache/", TigerApp::PublicCacheRoot());
         $this->assertEquals("localhost", TigerApp::WebHost());
@@ -83,7 +83,7 @@ class TigerAppTest extends TigerBaseTest
         rmdir("/tmp/nochancebro");
     }
 
-  /**
+    /**
    * @expectedException \TigerKit\TigerException
    * @expectedExceptionMessage Cannot write to /nochancebro
    */
@@ -92,7 +92,7 @@ class TigerAppTest extends TigerBaseTest
         TigerApp::run()->begin()->parseConfig("/nochancebro/DoesntExist.yaml");
     }
 
-  /**
+    /**
    * @expectedException \TigerKit\TigerException
    * @expectedExceptionMessage Cannot write to /DoesntExist.yaml
    */
@@ -101,7 +101,7 @@ class TigerAppTest extends TigerBaseTest
         TigerApp::run()->begin()->parseConfig("/DoesntExist.yaml");
     }
 
-  /**
+    /**
    * @expectedException \TigerKit\TigerException
    * @expectedExceptionMessage Unsupported storage type: notatype.
    */

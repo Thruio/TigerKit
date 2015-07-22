@@ -6,9 +6,9 @@ use TigerKit\Models;
 class CommentService extends BaseService
 {
 
-  /**
+    /**
    * @param Models\Comment $comment
-   * @param Models\File $file
+   * @param Models\File    $file
    * @return Models\ImageCommentLink
    */
     public function addCommentToFile(Models\Comment $comment, Models\File $file)
@@ -20,9 +20,9 @@ class CommentService extends BaseService
         return $link;
     }
 
-  /**
+    /**
    * @param Models\Comment $comment
-   * @param Models\Image $image
+   * @param Models\Image   $image
    * @return Models\ImageCommentLink
    */
     public function addCommentToImage(Models\Comment $comment, Models\Image $image)
@@ -32,7 +32,7 @@ class CommentService extends BaseService
         return $this->addCommentToFile($comment, $image);
     }
 
-  /**
+    /**
    * @param Models\File $file
    * @return Models\Comment[]|false
    */
@@ -44,7 +44,9 @@ class CommentService extends BaseService
         ->exec();
         $comment_ids = [];
         foreach ($links as $link) {
-          /** @var $link Models\ImageCommentLink */
+            /**
+ * @var $link Models\ImageCommentLink 
+*/
             $comment_ids[] = $link->comment_id;
         }
         return Models\Comment::search()->where('comment_id', $comment_ids, 'IN')->exec();

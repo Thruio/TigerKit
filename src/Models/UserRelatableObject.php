@@ -28,7 +28,7 @@ abstract class UserRelatableObject extends VersionedActiveRecord
     {
         $currentUser = User::getCurrent();
 
-      // Set the created date & user
+        // Set the created date & user
         if (!$this->created) {
             $this->created = date("Y-m-d H:i:s");
             if ($currentUser instanceof User) {
@@ -36,7 +36,7 @@ abstract class UserRelatableObject extends VersionedActiveRecord
             }
         }
 
-      // Set the Updated date & user
+        // Set the Updated date & user
         $this->updated = date("Y-m-d H:i:s");
         if ($currentUser instanceof User) {
             $this->updated_user_id = $currentUser->user_id;
@@ -45,7 +45,7 @@ abstract class UserRelatableObject extends VersionedActiveRecord
         return parent::save($automatic_reload);
     }
 
-  /**
+    /**
    * @return User|false
    */
     public function getCreatedUser()
@@ -56,7 +56,7 @@ abstract class UserRelatableObject extends VersionedActiveRecord
         return $this->_created_user;
     }
 
-  /**
+    /**
    * @return User|false
    */
     public function getUpdatedUser()

@@ -19,9 +19,11 @@ class TigerSlimTest extends TigerBaseTest
 
         $tigerApp = new TigerApp(__DIR__);
         $tigerSlim = $tigerApp->getSlimApp();
-        $tigerSlim->get("/tigerslimtest", function() use ($tigerSlim, $body){
-            $tigerSlim->response()->body($body);
-        });
+        $tigerSlim->get(
+            "/tigerslimtest", function () use ($tigerSlim, $body) {
+                $tigerSlim->response()->body($body);
+            }
+        );
 
         $requestParams = array(
           'PATH_INFO' => "/tigerslimtest",

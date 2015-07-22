@@ -9,17 +9,17 @@ use Thru\Session\Session;
 class UserService extends BaseService
 {
 
-  /**
+    /**
    * @param $username
    * @param $password
    * @return bool
    */
     public function doLogin($username, $password)
     {
-      // Support logging in with email address
+        // Support logging in with email address
         $user = Models\User::search()->where('email', $username)->execOne();
 
-      // Support logging in with username
+        // Support logging in with username
         if (!$user instanceof Models\User) {
             $user = Models\User::search()->where('username', $username)->execOne();
         }
@@ -36,7 +36,7 @@ class UserService extends BaseService
         }
     }
 
-  /**
+    /**
    * @param $username
    * @param $realname
    * @param $password

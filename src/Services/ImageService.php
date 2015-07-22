@@ -6,7 +6,7 @@ use TigerKit\TigerException;
 
 class ImageService extends BaseService
 {
-  /**
+    /**
    * @return Models\Image[]
    */
     public function getAllImages()
@@ -14,7 +14,7 @@ class ImageService extends BaseService
         return Models\Image::search()->where('deleted', "No")->exec();
     }
 
-  /**
+    /**
    * @param Models\User $user
    * @param $uploadFile
    * @return Models\Image
@@ -27,7 +27,7 @@ class ImageService extends BaseService
         return $image;
     }
 
-  /**
+    /**
    * @param $tagName
    * @return Models\Image[]|false
    * @throws TigerException
@@ -45,13 +45,15 @@ class ImageService extends BaseService
         ->exec();
         $imageIds = [];
         foreach ($imageTagLinks as $imageTagLink) {
-          /** @var $imageTagLink Models\ImageTagLink */
+            /**
+ * @var $imageTagLink Models\ImageTagLink 
+*/
             $imageIds[] = $imageTagLink->file_id;
         }
         return $this->getImagesByImageIds($imageIds);
     }
 
-  /**
+    /**
    * @param $imageIds
    * @return Models\Image[]|false
    */
@@ -86,7 +88,7 @@ class ImageService extends BaseService
             $tags = [$tags];
         }
 
-      // Text to Objects..
+        // Text to Objects..
         foreach ($tags as &$tag) {
             if (is_string($tag)) {
                 $tag = TagService::CreateOrFind($tag);
@@ -95,9 +97,13 @@ class ImageService extends BaseService
 
         $imageTagLinks = [];
         foreach ($images as $image) {
-          /** @var $image Models\Image */
+            /**
+ * @var $image Models\Image 
+*/
             foreach ($tags as $tag) {
-              /** @var $tag Models\Tag */
+                /**
+ * @var $tag Models\Tag 
+*/
                 $imageTagLinks[] = $this->addTag($image, $tag, $user);
             }
         }

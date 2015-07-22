@@ -11,7 +11,9 @@ use Faker;
 abstract class TigerWebBaseTest extends TigerBaseTest
 {
 
-  /** @var Slim */
+    /**
+ * @var Slim 
+*/
     protected $slim;
 
     public function setUp()
@@ -19,7 +21,7 @@ abstract class TigerWebBaseTest extends TigerBaseTest
         parent::setUp();
     }
 
-  /**
+    /**
    * @param string $path
    * @return Response
    */

@@ -45,7 +45,7 @@ class User extends UserRelatableObject
     {
         $passwordInfo = password_get_info($this->password);
         if (password_verify($password, $this->password)) {
-          // success. But check for needing to be rehashed.
+            // success. But check for needing to be rehashed.
             if (password_needs_rehash($this->password, PASSWORD_DEFAULT)) {
                 $this->setPassword($password);
                 TigerApp::log("Password for {$this->username} rehashed.");
@@ -65,7 +65,7 @@ class User extends UserRelatableObject
         }
     }
 
-  /**
+    /**
    * Get the current user.
    * @return User|false
    */
@@ -77,7 +77,7 @@ class User extends UserRelatableObject
         return false;
     }
 
-  /**
+    /**
    * Set the current user.
    * @param User $user
    * @return bool

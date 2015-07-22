@@ -9,7 +9,9 @@ use TigerKit\TigerView;
 class TigerViewTest extends TigerBaseTest
 {
 
-  /** @var TigerView */
+    /**
+ * @var TigerView 
+*/
     private $tigerView;
 
     public function setUp()

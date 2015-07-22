@@ -6,7 +6,9 @@ use Slim\Slim;
 class BaseController
 {
 
-  /** @var Slim */
+    /**
+ * @var Slim 
+*/
     protected $slim;
 
     public function __construct()

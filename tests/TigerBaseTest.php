@@ -11,14 +11,20 @@ use TigerKit\Models\User;
 
 abstract class TigerBaseTest extends \PHPUnit_Framework_TestCase
 {
-  /** @var TigerApp */
+    /**
+ * @var TigerApp 
+*/
     protected $tiger;
-  /** @var Faker\Factory */
+    /**
+ * @var Faker\Factory 
+*/
     protected $faker;
 
     protected $testUserUsername;
     protected $testUserPassword;
-  /** @var User */
+    /**
+ * @var User 
+*/
     protected $testUser;
 
     public function setUp()
@@ -27,7 +33,7 @@ abstract class TigerBaseTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
         $_SESSION = array();
 
-      // Initialise Faker
+        // Initialise Faker
         $this->faker = Faker\Factory::create();
         $this->faker->addProvider(new Faker\Provider\en_US\Person($this->faker));
         $this->faker->addProvider(new Faker\Provider\en_US\Address($this->faker));
@@ -36,7 +42,7 @@ abstract class TigerBaseTest extends \PHPUnit_Framework_TestCase
         $this->faker->addProvider(new Faker\Provider\Lorem($this->faker));
         $this->faker->addProvider(new Faker\Provider\Internet($this->faker));
 
-      // Create Test user.
+        // Create Test user.
         $this->testUserUsername = $this->faker->userName;
         $this->testUserPassword = $this->faker->password;
         $this->testUser = new User();

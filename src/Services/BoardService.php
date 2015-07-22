@@ -48,7 +48,7 @@ class BoardService extends BaseService
 
     /**
      * @param Models\Board $board
-     * @param Models\User $user
+     * @param Models\User  $user
      * @return Models\UserBoardLink
      */
     public function subscribeUser(Models\Board $board, Models\User $user)
@@ -68,9 +68,9 @@ class BoardService extends BaseService
     public function calculateSubscriptionCounts(Models\Board $board)
     {
         $board->subscription_count = Models\UserBoardLink::search()
-          ->where("board_id", $board->board_id)
-          ->where('deleted', 'No')
-          ->count();
+            ->where("board_id", $board->board_id)
+            ->where('deleted', 'No')
+            ->count();
         $board->save();
         return $board;
     }
@@ -82,9 +82,9 @@ class BoardService extends BaseService
     public function calculateThreadCounts(Models\Board $board)
     {
         $board->thread_count = Models\Thread::search()
-          ->where("board_id", $board->board_id)
-          ->where('deleted', 'No')
-          ->count();
+            ->where("board_id", $board->board_id)
+            ->where('deleted', 'No')
+            ->count();
         $board->save();
         return $board;
     }
