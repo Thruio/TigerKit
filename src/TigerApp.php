@@ -296,6 +296,25 @@ class TigerApp
                 $config = array();
 
                 $config['db_type'] = $settings['Type'];
+                if (isset($settings['DockerLink'])){
+                    $prefix = $settings['DockerLink'];
+                    if(isset($_ENV["{$prefix}_PORT"])){
+                        $host = parse_url($_ENV["{$prefix}_PORT"]);
+                        $config['db_hostname'] = $host['host'];
+                        $config['db_port'] = $host['port'];
+                        if(isset($_ENV["{$prefix}_USERNAME"])){
+                            $config['db_username'] = $_ENV["{$prefix}_USERNAME"];
+                        }
+                        if(isset($_ENV["{$prefix}_PASSWORD"])){
+                            $config['db_password'] = $_ENV["{$prefix}_PASSWORD"];
+                        }
+                        if (isset($_ENV["{$prefix}_DATABASE"])) {
+                            $config['db_database'] = $_ENV["{$prefix}_DATABASE"];
+                        }
+                    }else{
+                        throw new \Exception("Cannot find \$_ENV[{$prefix}_PORT] trying to use DockerLink config.");
+                    }
+                }
                 if (isset($settings['Host'])) {
                     $config['db_hostname'] = $settings['Host'];
                 }
