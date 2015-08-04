@@ -277,7 +277,13 @@ class TigerApp
      */
     public function begin()
     {
-        $configFile = (getenv('HOST') ? getenv('HOST') : 'Default') . '.yaml';
+        if(defined('APP_ENV')){
+            $configFile = APP_ENV . '.yaml';
+        }elseif(getenv('HOST')) {
+            $configFile = getenv('HOST') . '.yaml';
+        }else{
+            $configFile = 'Default.yaml';
+        }
         $this->parseConfig("{$this->appRoot}/config/{$configFile}");
 
         $this->logger = $this->setupLogger();
@@ -341,7 +347,8 @@ class TigerApp
         }
 
         // Initialise Storage Pool
-        if (count(TigerApp::Config("Storage")) > 0) {
+
+        if (TigerApp::Config("Storage") !== false) {
             foreach (TigerApp::Config("Storage") as $name => $config) {
                 $this->storagePool[$name] = $this->setupStorage($config);
             }
