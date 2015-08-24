@@ -99,6 +99,7 @@ class TigerApp
 
     public static function log($message, $level = Log::INFO)
     {
+        error_log($message, $level);
         self::$tigerApp->getLogger()->write($message, $level);
     }
 
