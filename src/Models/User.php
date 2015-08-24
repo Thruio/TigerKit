@@ -38,6 +38,7 @@ class User extends UserRelatableObject
     public function setPassword($password)
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->save();
         return $this;
     }
 
