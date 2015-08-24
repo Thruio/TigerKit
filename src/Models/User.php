@@ -44,11 +44,19 @@ class User extends UserRelatableObject
     public function checkPassword($password)
     {
         $passwordInfo = password_get_info($this->password);
+        // Check for legacy unsalted SHA1
+        if (strlen($this->password) == 40 && $passwordInfo['algoName'] == "unknown"){
+            if(hash("SHA1", $password) == $this->password){
+                $this->setPassword($password);
+                TigerApp::log("Password for {$this->username} rehashed (Legacy).");
+                return true;
+            }
+        }
         if (password_verify($password, $this->password)) {
             // success. But check for needing to be rehashed.
             if (password_needs_rehash($this->password, PASSWORD_DEFAULT)) {
                 $this->setPassword($password);
-                TigerApp::log("Password for {$this->username} rehashed.");
+                TigerApp::log("Password for {$this->username} rehashed ({$passwordInfo['algoName']}).");
             }
             return true;
         } else {
