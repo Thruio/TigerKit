@@ -80,8 +80,9 @@ class User extends UserRelatableObject
    */
     public static function getCurrent()
     {
-        if (Session::get('user') && Session::get('user') instanceof User) {
-            return self::search()->where('user_id', Session::get('user')->user_id)->execOne();
+        $class = get_called_class();
+        if (Session::get('user')) {
+            return $class::search()->where('user_id', Session::get('user')->user_id)->execOne();
         }
         return false;
     }
