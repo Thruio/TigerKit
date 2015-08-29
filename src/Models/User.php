@@ -38,7 +38,6 @@ class User extends UserRelatableObject
     public function setPassword($password)
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
-        $this->save();
         return $this;
     }
 
@@ -57,6 +56,7 @@ class User extends UserRelatableObject
             // success. But check for needing to be rehashed.
             if (password_needs_rehash($this->password, PASSWORD_DEFAULT)) {
                 $this->setPassword($password);
+                $this->save();
                 TigerApp::log("Password for {$this->username} rehashed ({$passwordInfo['algoName']}).");
             }
             return true;
@@ -102,7 +102,7 @@ class User extends UserRelatableObject
     public function save($automatic_reload = true)
     {
         if (!$this->user_id) {
-            TigerApp::log(Log::ALERT, "New user created: {$this->username} / {$this->displayname} / {$this->email}");
+            TigerApp::log("New user created: {$this->username} / {$this->displayname} / {$this->email}");
         }
 
         return parent::save($automatic_reload);
