@@ -54,7 +54,17 @@ class TigerView extends View
 
     public function addJS($js)
     {
-        $this->_js[] = $js;
+        $filename = basename($js);
+        $data = file_get_contents(TigerApp::AppRoot() . "/" . $js);
+        $id = md5($filename);
+        $publicLocation = "cache/{$id}.js";
+        $publicLocationOnDisk = TigerApp::AppRoot() . "/public/" . $publicLocation;
+        if (!file_exists(dirname($publicLocationOnDisk))) {
+            mkdir(dirname($publicLocationOnDisk), 0777, true);
+        }
+        file_put_contents($publicLocationOnDisk, $data);
+        chmod($publicLocationOnDisk, 0664);
+        $this->_js[] = $publicLocation;
         return $this;
     }
 
