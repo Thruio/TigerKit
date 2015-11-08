@@ -50,7 +50,7 @@ class File extends UserRelatableObject
     {
         $class = get_called_class();
         /**
- * @var File $object 
+ * @var File $object
 */
         $object = new $class();
         $object->filename = $uploadFile['name'];

@@ -45,7 +45,7 @@ class CommentService extends BaseService
         $comment_ids = [];
         foreach ($links as $link) {
             /**
- * @var $link Models\ImageCommentLink 
+ * @var $link Models\ImageCommentLink
 */
             $comment_ids[] = $link->comment_id;
         }

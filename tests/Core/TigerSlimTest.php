@@ -20,7 +20,11 @@ class TigerSlimTest extends TigerBaseTest
         $tigerApp = new TigerApp(__DIR__);
         $tigerSlim = $tigerApp->getSlimApp();
         $tigerSlim->get(
-            "/tigerslimtest", function () use ($tigerSlim, $body) {
+            "/tigerslimtest",
+            function () use (
+                $tigerSlim,
+                $body
+            ) {
                 $tigerSlim->response()->body($body);
             }
         );
@@ -40,6 +44,4 @@ class TigerSlimTest extends TigerBaseTest
         $this->assertEquals(strlen($body), $response->getLength());
 
     }
-
-
 }

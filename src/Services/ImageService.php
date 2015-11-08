@@ -46,7 +46,7 @@ class ImageService extends BaseService
         $imageIds = [];
         foreach ($imageTagLinks as $imageTagLink) {
             /**
- * @var $imageTagLink Models\ImageTagLink 
+ * @var $imageTagLink Models\ImageTagLink
 */
             $imageIds[] = $imageTagLink->file_id;
         }
@@ -98,11 +98,11 @@ class ImageService extends BaseService
         $imageTagLinks = [];
         foreach ($images as $image) {
             /**
- * @var $image Models\Image 
+ * @var $image Models\Image
 */
             foreach ($tags as $tag) {
                 /**
- * @var $tag Models\Tag 
+ * @var $tag Models\Tag
 */
                 $imageTagLinks[] = $this->addTag($image, $tag, $user);
             }

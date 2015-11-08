@@ -12,18 +12,18 @@ use TigerKit\Models\User;
 abstract class TigerBaseTest extends \PHPUnit_Framework_TestCase
 {
     /**
- * @var TigerApp 
+ * @var TigerApp
 */
     protected $tiger;
     /**
- * @var Faker\Factory 
+ * @var Faker\Factory
 */
     protected $faker;
 
     protected $testUserUsername;
     protected $testUserPassword;
     /**
- * @var User 
+ * @var User
 */
     protected $testUser;
 

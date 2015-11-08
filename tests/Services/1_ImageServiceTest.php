@@ -14,7 +14,7 @@ class ImageServiceTest extends TigerBaseTest
 {
 
     /**
- * @var ImageService 
+ * @var ImageService
 */
     private $imageService;
 
@@ -178,7 +178,7 @@ class ImageServiceTest extends TigerBaseTest
         $userService = new UserService();
         $user = $userService->createUser("test", "test", "test", "test@example.com");
         /**
- * @var Image $image 
+ * @var Image $image
 */
         $image = new Image();
         $image->user_id = $user->user_id;

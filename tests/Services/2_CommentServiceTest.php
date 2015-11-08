@@ -13,20 +13,20 @@ use TigerKit\Test\TigerBaseTest;
 class CommentServiceTest extends TigerBaseTest
 {
     /**
- * @var ImageService 
+ * @var ImageService
 */
     private $imageService;
     /**
- * @var UserService 
+ * @var UserService
 */
     private $userService;
     /**
- * @var CommentService 
+ * @var CommentService
 */
     private $commentService;
 
     /**
- * @var User[] 
+ * @var User[]
 */
     private $commentUserPool;
 

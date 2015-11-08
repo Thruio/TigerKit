@@ -26,7 +26,7 @@ class Image extends File
     public static function CreateFromUpload($uploadFile)
     {
         /**
- * @var Image $object 
+ * @var Image $object
 */
         $object = parent::CreateFromUpload($uploadFile);
         $size = getimagesize($uploadFile['tmp_name']);

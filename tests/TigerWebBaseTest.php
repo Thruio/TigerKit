@@ -12,7 +12,7 @@ abstract class TigerWebBaseTest extends TigerBaseTest
 {
 
     /**
- * @var Slim 
+ * @var Slim
 */
     protected $slim;
 

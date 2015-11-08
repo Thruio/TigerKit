@@ -10,7 +10,7 @@ class TigerViewTest extends TigerBaseTest
 {
 
     /**
- * @var TigerView 
+ * @var TigerView
 */
     private $tigerView;
 

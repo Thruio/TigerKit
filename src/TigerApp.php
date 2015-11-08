@@ -132,8 +132,10 @@ class TigerApp
 
     public static function WebRoot()
     {
-        return (self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . (!in_array(self::WebPort(),
-          [443, 80]) ? ':' . self::WebPort() : '') . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
+        return (self::WebIsSSL() ? "https" : "http") . "://" . self::WebHost() . (!in_array(
+            self::WebPort(),
+            [443, 80]
+        ) ? ':' . self::WebPort() : '') . rtrim(dirname($_SERVER['SCRIPT_NAME']), "/\\") . "/";
     }
 
     /**
@@ -239,8 +241,12 @@ class TigerApp
     private function setupLogger()
     {
         // Set up file logger.
-        $fileLoggerHandler = new LogHandler\StreamHandler(TigerApp::LogRoot() . date('Y-m-d') . '.log', null, null,
-          0664);
+        $fileLoggerHandler = new LogHandler\StreamHandler(
+            TigerApp::LogRoot() . date('Y-m-d') . '.log',
+            null,
+            null,
+            0664
+        );
 
         // Set up Chrome Logger
         $chromeLoggerHandler = new LogHandler\ChromePHPHandler();
@@ -251,13 +257,13 @@ class TigerApp
         // $slackLoggerHandler->setFormatter(new LogFormatter\LineFormatter());
 
         $logger = new MonologWriter(
-          array(
+            array(
             'handlers' => [
               $fileLoggerHandler,
               $chromeLoggerHandler,
                 // $slackLoggerHandler,
             ],
-          )
+            )
         );
 
         return $logger;
@@ -277,11 +283,11 @@ class TigerApp
      */
     public function begin()
     {
-        if(defined('APP_ENV')){
+        if (defined('APP_ENV')) {
             $configFile = APP_ENV . '.yaml';
-        }elseif(getenv('HOST')) {
+        } elseif (getenv('HOST')) {
             $configFile = getenv('HOST') . '.yaml';
-        }else{
+        } else {
             $configFile = 'Default.yaml';
         }
         $this->parseConfig("{$this->appRoot}/config/{$configFile}");
@@ -302,22 +308,22 @@ class TigerApp
                 $config = array();
 
                 $config['db_type'] = $settings['Type'];
-                if (isset($settings['DockerLink'])){
+                if (isset($settings['DockerLink'])) {
                     $prefix = $settings['DockerLink'];
-                    if(isset($_ENV["{$prefix}_PORT"])){
+                    if (isset($_ENV["{$prefix}_PORT"])) {
                         $host = parse_url($_ENV["{$prefix}_PORT"]);
                         $config['db_hostname'] = $host['host'];
                         $config['db_port'] = $host['port'];
-                        if(isset($_ENV["{$prefix}_USERNAME"])){
+                        if (isset($_ENV["{$prefix}_USERNAME"])) {
                             $config['db_username'] = $_ENV["{$prefix}_USERNAME"];
                         }
-                        if(isset($_ENV["{$prefix}_PASSWORD"])){
+                        if (isset($_ENV["{$prefix}_PASSWORD"])) {
                             $config['db_password'] = $_ENV["{$prefix}_PASSWORD"];
                         }
                         if (isset($_ENV["{$prefix}_DATABASE"])) {
                             $config['db_database'] = $_ENV["{$prefix}_DATABASE"];
                         }
-                    }else{
+                    } else {
                         throw new \Exception("Cannot find \$_ENV[{$prefix}_PORT] trying to use DockerLink config.");
                     }
                 }
@@ -362,11 +368,11 @@ class TigerApp
 
         // Initialise slim app.
         $this->slimApp = new TigerSlim(
-          array(
+            array(
             'templates.path' => self::TemplatesRoot(),
             'log.writer' => $this->logger,
             'log.enabled' => true,
-          )
+            )
         );
 
         // Set up whoops
