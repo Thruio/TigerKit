@@ -45,8 +45,8 @@ class User extends UserRelatableObject
     {
         $passwordInfo = password_get_info($this->password);
         // Check for legacy unsalted SHA1
-        if (strlen($this->password) == 40 && $passwordInfo['algoName'] == "unknown"){
-            if(hash("SHA1", $password) == $this->password){
+        if (strlen($this->password) == 40 && $passwordInfo['algoName'] == "unknown") {
+            if (hash("SHA1", $password) == $this->password) {
                 $this->setPassword($password);
                 TigerApp::log("Password for {$this->username} rehashed (Legacy).");
                 return true;
