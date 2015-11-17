@@ -1,6 +1,7 @@
 <?php
 namespace TigerKit;
 
+use Aws\S3\S3Client;
 use Flynsarmy\SlimMonolog\Log\MonologWriter;
 use League\Flysystem;
 use Monolog\Formatter as LogFormatter;
@@ -109,6 +110,14 @@ class TigerApp
     public function __construct($appRoot)
     {
         $this->appRoot = $appRoot;
+    }
+
+    /**
+     * @return TigerApp
+     */
+    public static function Instance()
+    {
+        return self::$tigerApp;
     }
 
     public static function AppRoot()
@@ -318,11 +327,20 @@ class TigerApp
                         if (isset($_ENV["{$prefix}_USERNAME"])) {
                             $config['db_username'] = $_ENV["{$prefix}_USERNAME"];
                         }
+                        if (isset($_ENV["{$prefix}_ENV_MYSQL_USER"])) {
+                            $config['db_username'] = $_ENV["{$prefix}_ENV_MYSQL_USER"];
+                        }
                         if (isset($_ENV["{$prefix}_PASSWORD"])) {
                             $config['db_password'] = $_ENV["{$prefix}_PASSWORD"];
                         }
+                        if (isset($_ENV["{$prefix}_ENV_MYSQL_PASSWORD"])) {
+                            $config['db_password'] = $_ENV["{$prefix}_ENV_MYSQL_PASSWORD"];
+                        }
                         if (isset($_ENV["{$prefix}_DATABASE"])) {
                             $config['db_database'] = $_ENV["{$prefix}_DATABASE"];
+                        }
+                        if (isset($_ENV["{$prefix}_ENV_MYSQL_DATABASE"])){
+                            $config['db_database'] = $_ENV["{$prefix}_ENV_MYSQL_DATABASE"];
                         }
                     } else {
                         throw new \Exception("Cannot find \$_ENV[{$prefix}_PORT] trying to use DockerLink config.");
@@ -395,6 +413,19 @@ class TigerApp
         switch (strtolower($config['Type'])) {
             case 'zip':
                 $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
+                break;
+            case "s3":
+                $clientConfig = [];
+                if(isset($client['BaseUrl'])) {
+                    $clientConfig['base_url'] = $config['BaseUrl'];
+                }
+                $clientConfig['key'] = $config['Key'];
+                $clientConfig['secret'] = $config['Secret'];
+                if(isset($config['Region'])) {
+                    $clientConfig['region'] = $config['Region'];
+                }
+                $client  = S3Client::factory($clientConfig);
+                $adaptor = new Flysystem\AwsS3v3\AwsS3Adapter($client, $config['Bucket']);
                 break;
             default:
                 throw new TigerException("Unsupported storage type: {$config['Type']}.");
