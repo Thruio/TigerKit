@@ -309,6 +309,8 @@ class TigerApp
             ini_set("display_errors", 1);
         }
 
+        $environment = array_merge($_ENV, $_SERVER);
+
         // TODO: Load app tree from yaml
         $this->appTree = self::$defaultAppTree;
 
@@ -320,30 +322,30 @@ class TigerApp
                 $config['db_type'] = $settings['Type'];
                 if (isset($settings['DockerLink'])) {
                     $prefix = $settings['DockerLink'];
-                    if (isset($_ENV["{$prefix}_PORT"])) {
-                        $host = parse_url($_ENV["{$prefix}_PORT"]);
+                    if (isset($environment["{$prefix}_PORT"])) {
+                        $host = parse_url($environment["{$prefix}_PORT"]);
                         $config['db_hostname'] = $host['host'];
                         $config['db_port'] = $host['port'];
-                        if (isset($_ENV["{$prefix}_USERNAME"])) {
-                            $config['db_username'] = $_ENV["{$prefix}_USERNAME"];
+                        if (isset($environment["{$prefix}_USERNAME"])) {
+                            $config['db_username'] = $environment["{$prefix}_USERNAME"];
                         }
-                        if (isset($_ENV["{$prefix}_ENV_MYSQL_USER"])) {
-                            $config['db_username'] = $_ENV["{$prefix}_ENV_MYSQL_USER"];
+                        if (isset($environment["{$prefix}_ENV_MYSQL_USER"])) {
+                            $config['db_username'] = $environment["{$prefix}_ENV_MYSQL_USER"];
                         }
-                        if (isset($_ENV["{$prefix}_PASSWORD"])) {
-                            $config['db_password'] = $_ENV["{$prefix}_PASSWORD"];
+                        if (isset($environment["{$prefix}_PASSWORD"])) {
+                            $config['db_password'] = $environment["{$prefix}_PASSWORD"];
                         }
-                        if (isset($_ENV["{$prefix}_ENV_MYSQL_PASSWORD"])) {
-                            $config['db_password'] = $_ENV["{$prefix}_ENV_MYSQL_PASSWORD"];
+                        if (isset($environment["{$prefix}_ENV_MYSQL_PASSWORD"])) {
+                            $config['db_password'] = $environment["{$prefix}_ENV_MYSQL_PASSWORD"];
                         }
-                        if (isset($_ENV["{$prefix}_DATABASE"])) {
-                            $config['db_database'] = $_ENV["{$prefix}_DATABASE"];
+                        if (isset($environment["{$prefix}_DATABASE"])) {
+                            $config['db_database'] = $environment["{$prefix}_DATABASE"];
                         }
-                        if (isset($_ENV["{$prefix}_ENV_MYSQL_DATABASE"])){
-                            $config['db_database'] = $_ENV["{$prefix}_ENV_MYSQL_DATABASE"];
+                        if (isset($environment["{$prefix}_ENV_MYSQL_DATABASE"])){
+                            $config['db_database'] = $environment["{$prefix}_ENV_MYSQL_DATABASE"];
                         }
                     } else {
-                        throw new \Exception("Cannot find \$_ENV[{$prefix}_PORT] trying to use DockerLink config.");
+                        throw new \Exception("Cannot find \$environment[{$prefix}_PORT] trying to use DockerLink config.");
                     }
                 }
                 if (isset($settings['Host'])) {
