@@ -416,7 +416,7 @@ class TigerApp
                 break;
             case "s3":
                 $clientConfig = [];
-                if(isset($client['BaseUrl'])) {
+                if(isset($config['BaseUrl'])) {
                     $clientConfig['base_url'] = $config['BaseUrl'];
                 }
                 $clientConfig['key'] = $config['Key'];
@@ -424,8 +424,9 @@ class TigerApp
                 if(isset($config['Region'])) {
                     $clientConfig['region'] = $config['Region'];
                 }
+#                \Kint::dump($clientConfig);exit;
                 $client  = S3Client::factory($clientConfig);
-                $adaptor = new Flysystem\AwsS3v3\AwsS3Adapter($client, $config['Bucket']);
+                $adaptor = new Flysystem\AwsS3v2\AwsS3Adapter($client, $config['Bucket']);
                 break;
             default:
                 throw new TigerException("Unsupported storage type: {$config['Type']}.");
