@@ -6,6 +6,7 @@ use Flynsarmy\SlimMonolog\Log\MonologWriter;
 use League\Flysystem;
 use Monolog\Formatter as LogFormatter;
 use Monolog\Handler as LogHandler;
+use Monolog\Logger;
 use Slim\Log;
 use Symfony\Component\Yaml\Yaml;
 use Thru\ActiveRecord;
@@ -253,8 +254,8 @@ class TigerApp
         // Set up file logger.
         $fileLoggerHandler = new LogHandler\StreamHandler(
             TigerApp::LogRoot() . date('Y-m-d') . '.log',
-            null,
-            null,
+            Logger::DEBUG,
+            true,
             0664
         );
 
