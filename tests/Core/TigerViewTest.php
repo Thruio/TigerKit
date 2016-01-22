@@ -44,8 +44,8 @@ class TigerViewTest extends TigerBaseTest
     {
         $this->tigerView->addCSS("vendor/twbs/bootstrap/dist/css/bootstrap.min.css");
         $this->tigerView->addCSS("vendor/twbs/bootstrap/dist/css/bootstrap-theme.css");
-        $this->tigerView->addJS("vendor/twbs/bootstrap/dist/bootstrap.js");
-        $this->tigerView->addJS("vendor/twbs/bootstrap/dist/bootstrap.min.js");
+        $this->tigerView->addJS("vendor/twbs/bootstrap/dist/js/bootstrap.js");
+        $this->tigerView->addJS("vendor/twbs/bootstrap/dist/js/bootstrap.min.js");
         $this->assertEquals(2, count($this->tigerView->getCSS()));
         $this->assertEquals(2, count($this->tigerView->getJS()));
     }
