@@ -252,12 +252,17 @@ class TigerApp
     private function setupLogger()
     {
         // Set up file logger.
+        /*
+        $fileLoggerFile = TigerApp::LogRoot() . date('Y-m-d') . '.log';
+        if(!file_exists(dirname($fileLoggerFile))){
+            mkdir(dirname($fileLoggerFile),0777,true);
+        }
         $fileLoggerHandler = new LogHandler\StreamHandler(
-            TigerApp::LogRoot() . date('Y-m-d') . '.log',
+            $fileLoggerFile,
             Logger::DEBUG,
             true,
             0664
-        );
+        );*/
 
         // Set up Chrome Logger
         $chromeLoggerHandler = new LogHandler\ChromePHPHandler();
