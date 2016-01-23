@@ -275,7 +275,7 @@ class TigerApp
         $logger = new MonologWriter(
             array(
             'handlers' => [
-              $fileLoggerHandler,
+              //$fileLoggerHandler,
               $chromeLoggerHandler,
                 // $slackLoggerHandler,
             ],
