@@ -38,7 +38,7 @@
     "slim/slim": "~2.6@stable",
     "filp/whoops": "1.*@stable",
     "zeuxisoo/slim-whoops": "dev-master",
-    "raveren/kint": "dev-master@dev",
+    "raveren/kint": "^1.0",
     "predis/predis": "1.0.*@dev",
     "thru.io/active_record": ">=0.4",
     "thru.io/active_record_migrations": "dev-master@dev",
