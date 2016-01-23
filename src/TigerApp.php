@@ -311,6 +311,7 @@ class TigerApp
         }
 
         $environment = array_merge($_ENV, $_SERVER);
+        ksort($environment);
 
         // TODO: Load app tree from yaml
         $this->appTree = self::$defaultAppTree;
@@ -322,7 +323,7 @@ class TigerApp
 
                 $config['db_type'] = $settings['Type'];
                 if (isset($settings['DockerLink'])) {
-                    $prefix = $settings['DockerLink'];
+                    $prefix = strtoupper($settings['DockerLink']);
                     if (isset($environment["{$prefix}_PORT"])) {
                         $host = parse_url($environment["{$prefix}_PORT"]);
                         $config['db_hostname'] = $host['host'];
