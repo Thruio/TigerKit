@@ -71,4 +71,9 @@ class UserService extends BaseService
         $user->save();
         return $user;
     }
+
+    public function findUserByUUID($uuid)
+    {
+        return Models\User::search()->where('user_uuid', $uuid)->execOne();
+    }
 }

@@ -4,12 +4,14 @@ namespace TigerKit\Models;
 use Slim\Log;
 use \Thru\ActiveRecord\ActiveRecord;
 use Thru\Session\Session;
+use Thru\UUID;
 use TigerKit\TigerApp;
 
 /**
  * Class User
  * @package TigerKit\Models
  * @var $user_id INTEGER
+ * @var $user_uuid UUID
  * @var $username STRING
  * @var $displayname STRING
  * @var $password STRING(60)
@@ -21,6 +23,7 @@ class User extends UserRelatableObject
     protected $_table = "users";
 
     public $user_id;
+    public $user_uuid;
     public $username;
     public $displayname;
     public $password;
@@ -101,6 +104,9 @@ class User extends UserRelatableObject
 
     public function save($automatic_reload = true)
     {
+        if (!$this->user_uuid){
+            $this->user_uuid = UUID::v4();
+        }
         if (!$this->user_id) {
             TigerApp::log("New user created: {$this->username} / {$this->displayname} / {$this->email}");
         }
