@@ -405,7 +405,7 @@ class TigerApp
 
         // Set up whoops
         //$this->slimApp->config('whoops.editor', 'phpstorm');
-        $this->slimApp->add(new WhoopsMiddleware());
+        //$this->slimApp->add(new WhoopsMiddleware());
 
         // Set the View controller.
         // TODO: Make this settable in the config or somewhere in the sample App
