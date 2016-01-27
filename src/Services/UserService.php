@@ -5,6 +5,7 @@ use Slim;
 use TigerKit\Models;
 use TigerKit\TigerApp;
 use Thru\Session\Session;
+use TigerKit\TigerException;
 
 class UserService extends BaseService
 {
@@ -45,6 +46,14 @@ class UserService extends BaseService
    */
     public function createUser($username, $realname, $password, $email)
     {
+        if(Models\User::search()->where('username', $username)->count()){
+            throw new TigerException("Username {$username} already in use");
+        }
+
+        if(Models\User::search()->where('email', $email)->count()){
+            throw new TigerException("Email {$email} already in use");
+        }
+
         $user = new Models\User();
         $user->username = $username;
         $user->displayname = $realname;
