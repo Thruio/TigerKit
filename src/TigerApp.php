@@ -348,7 +348,7 @@ class TigerApp
                         if (isset($environment["{$prefix}_DATABASE"])) {
                             $config['db_database'] = $environment["{$prefix}_DATABASE"];
                         }
-                        if (isset($environment["{$prefix}_ENV_MYSQL_DATABASE"])){
+                        if (isset($environment["{$prefix}_ENV_MYSQL_DATABASE"])) {
                             $config['db_database'] = $environment["{$prefix}_ENV_MYSQL_DATABASE"];
                         }
                     } else {
@@ -420,25 +420,25 @@ class TigerApp
     public function setupStorage($config)
     {
         switch (strtolower($config['Type'])) {
-            case 'zip':
-                $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
-                break;
-            case "s3":
-                $clientConfig = [];
-                if(isset($config['BaseUrl'])) {
-                    $clientConfig['base_url'] = $config['BaseUrl'];
-                }
-                $clientConfig['key'] = $config['Key'];
-                $clientConfig['secret'] = $config['Secret'];
-                if(isset($config['Region'])) {
-                    $clientConfig['region'] = $config['Region'];
-                }
-#                \Kint::dump($clientConfig);exit;
-                $client  = S3Client::factory($clientConfig);
-                $adaptor = new Flysystem\AwsS3v2\AwsS3Adapter($client, $config['Bucket']);
-                break;
-            default:
-                throw new TigerException("Unsupported storage type: {$config['Type']}.");
+        case 'zip':
+            $adaptor = new Flysystem\ZipArchive\ZipArchiveAdapter(APP_ROOT . "/" . $config['Location']);
+            break;
+        case "s3":
+            $clientConfig = [];
+            if(isset($config['BaseUrl'])) {
+                $clientConfig['base_url'] = $config['BaseUrl'];
+            }
+            $clientConfig['key'] = $config['Key'];
+            $clientConfig['secret'] = $config['Secret'];
+            if(isset($config['Region'])) {
+                $clientConfig['region'] = $config['Region'];
+            }
+            // \Kint::dump($clientConfig);exit;
+            $client  = S3Client::factory($clientConfig);
+            $adaptor = new Flysystem\AwsS3v2\AwsS3Adapter($client, $config['Bucket']);
+            break;
+        default:
+            throw new TigerException("Unsupported storage type: {$config['Type']}.");
         }
 
         return new Flysystem\Filesystem($adaptor);
