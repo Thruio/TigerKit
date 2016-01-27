@@ -46,12 +46,20 @@ class UserService extends BaseService
    */
     public function createUser($username, $realname, $password, $email)
     {
-        if(Models\User::search()->where('username', $username)->count()){
-            throw new TigerException("Username {$username} already in use");
+        if(Models\User::search()->where('username', $username)->count()) {
+            throw new TigerException("Username {$username} already in use.");
         }
 
-        if(Models\User::search()->where('email', $email)->count()){
-            throw new TigerException("Email {$email} already in use");
+        if(Models\User::search()->where('email', $email)->count()) {
+            throw new TigerException("Email {$email} already in use.");
+        }
+
+        if(strlen($password) <= 5) {
+            throw new TigerException("Passwords must be 6 or more characters long.");
+        }
+
+        if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+            throw new TigerException("{$email} is not a valid email address.");
         }
 
         $user = new Models\User();
