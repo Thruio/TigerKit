@@ -57,4 +57,69 @@ class UserServiceTest extends TigerBaseTest
         $this->assertFalse($this->userService->doLogin($this->testUser->email, "bogus"));
         $this->assertFalse($this->userService->doLogin("bogus", $this->testUserPassword));
     }
+
+    /**
+     * @expectedException \TigerKit\TigerException
+     * @expectedExceptionMessage Passwords must be 6 or more characters long.
+     */
+    public function testMinimumPasswordLength(){
+        $this->assertTrue(
+            $this->userService->createUser(
+                $this->faker->userName,
+                $this->faker->name(),
+                "short",
+                $this->faker->email
+            )
+            instanceof Models\User
+        );
+    }
+
+
+    /**
+     * @expectedException \TigerKit\TigerException
+     * @expectedExceptionMessageRegExp /Username (.+) already in use\./
+     */
+    public function testEmailMustBeUnique(){
+        $existingUser = $this->userService->createUser(
+            $this->faker->userName,
+            $this->faker->name(),
+            $this->faker->password,
+            "{$this->faker->userName}@example.com"
+        );
+
+        $this->userService->createUser(
+            $existingUser->username,
+            $existingUser->displayname,
+            $existingUser->password,
+            $existingUser->email
+        );
+    }
+
+    public function testEmailValid(){
+        $this->assertTrue(
+            $this->userService->createUser(
+                $this->faker->userName,
+                $this->faker->name(),
+                $this->faker->password,
+                "{$this->faker->userName}@example.com"
+            )
+            instanceof Models\User
+        );
+    }
+
+    /**
+     * @expectedException \TigerKit\TigerException
+     * @expectedExceptionMessage notvalid is not a valid email address.
+     */
+    public function testEmailInValid(){
+        $this->assertTrue(
+            $this->userService->createUser(
+                $this->faker->userName,
+                $this->faker->name(),
+                $this->faker->password,
+                "notvalid"
+            )
+            instanceof Models\User
+        );
+    }
 }
