@@ -63,7 +63,7 @@ class User extends UserRelatableObject
                 TigerApp::log("Password for {$this->username} rehashed ({$passwordInfo['algoName']}).");
             }
             return true;
-        } else {
+        }else {
             return false;
         }
     }
@@ -72,15 +72,15 @@ class User extends UserRelatableObject
     {
         if (self::getCurrent() instanceof User) {
             return true;
-        } else {
+        }else {
             TigerApp::getSlimApp()->response()->redirect("/login");
         }
     }
 
     /**
-   * Get the current user.
-   * @return User|false
-   */
+     * Get the current user.
+     * @return User|false
+     */
     public static function getCurrent()
     {
         $class = get_called_class();
@@ -91,10 +91,10 @@ class User extends UserRelatableObject
     }
 
     /**
-   * Set the current user.
-   * @param User $user
-   * @return bool
-   */
+     * Set the current user.
+     * @param User $user
+     * @return bool
+     */
     public static function setCurrent(User $user = null)
     {
         Session::set('user', $user);

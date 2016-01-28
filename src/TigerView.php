@@ -19,7 +19,7 @@ class TigerView extends View
         }
         if (isset($data['noWrapper'])) {
             return parent::render($template, $data);
-        } else {
+        }else {
             $data['view'] = $this;
             $data['template'] = $template;
             return parent::render("decorator/decorator.phtml", $data);
@@ -95,7 +95,7 @@ class TigerView extends View
         if (isset($options['classes'])) {
             $classes = "class=\"" . implode(" ", $options['classes']) . "\"";
         }
-        return "<a " . (isset($classes) ? $classes." " : null) . "href=\"{$url}\">{$text}</a>";
+        return "<a " . (isset($classes) ? $classes . " " : null) . "href=\"{$url}\">{$text}</a>";
     }
 
     public function l($url, $text, $options = null)
@@ -107,7 +107,7 @@ class TigerView extends View
     {
         if ($this->_page_title && $decorate) {
             return "{$this->_site_title} - {$this->_page_title}";
-        } else {
+        }else {
             return "{$this->_site_title}";
         }
     }

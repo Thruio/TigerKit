@@ -7,7 +7,7 @@ class BaseController
 {
 
     /**
- * @var Slim
+     * @var Slim
 */
     protected $slim;
 
