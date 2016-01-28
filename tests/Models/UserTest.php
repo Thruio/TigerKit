@@ -14,6 +14,7 @@ class UserTest extends TigerBaseTest
         $user->username = $this->faker->userName;
         $user->displayname = $this->faker->name();
         $user->password = $oldHash;
+        $user->email = "example@example.com";
         $this->assertTrue($user->checkPassword('rasmuslerdorf'), "Check password worked from the old hash");
         $this->assertNotEquals($oldHash, $user->password, "Check the password hash had changed");
         $this->assertTrue($user->checkPassword('rasmuslerdorf'), "Check new hashed password works too.");
