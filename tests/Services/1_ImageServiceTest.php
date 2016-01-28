@@ -176,7 +176,12 @@ class ImageServiceTest extends TigerBaseTest
     public function testImageUserRelation()
     {
         $userService = new UserService();
-        $user = $userService->createUser("test", "test", "passwordlonger", "test@example.com");
+        $user = $userService->createUser(
+            $this->faker->userName,
+            $this->faker->name(),
+            "passwordlonger",
+            "{$this->faker->userName}@example.com"
+        );
         /**
          * @var Image $image
         */
