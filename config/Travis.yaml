@@ -3,4 +3,7 @@ Copyright: 'Your Name Here'
 'Debug Mode': 'On'
 Databases:
     Default: { Type: Mysql, Host: localhost, Port: 3306, Username: travis, Password: travis, Database: tigerkit }
-
+Caches:
+    Default: { Type: Redis, Host: localhost, Port: 6379, Database: 5 }
+Storage:
+    Default: { Type: Zip, Location: datablob.zip }
