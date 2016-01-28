@@ -11,10 +11,10 @@ class UserService extends BaseService
 {
 
     /**
-   * @param $username
-   * @param $password
-   * @return bool
-   */
+     * @param $username
+     * @param $password
+     * @return bool
+     */
     public function doLogin($username, $password)
     {
         // Support logging in with email address
@@ -31,34 +31,34 @@ class UserService extends BaseService
         } elseif ($user->checkPassword($password)) {
             Session::set("user", $user);
             return true;
-        } else {
+        }else {
             TigerApp::log("Failed login for {$username}", Slim\Log::WARN);
             return false;
         }
     }
 
     /**
-   * @param $username
-   * @param $realname
-   * @param $password
-   * @param $email
-   * @return Models\User
-   */
+     * @param $username
+     * @param $realname
+     * @param $password
+     * @param $email
+     * @return Models\User
+     */
     public function createUser($username, $realname, $password, $email)
     {
-        if(Models\User::search()->where('username', $username)->count()) {
+        if (Models\User::search()->where('username', $username)->count()) {
             throw new TigerException("Username {$username} already in use.");
         }
 
-        if(Models\User::search()->where('email', $email)->count()) {
+        if (Models\User::search()->where('email', $email)->count()) {
             throw new TigerException("Email {$email} already in use.");
         }
 
-        if(strlen($password) <= 5) {
+        if (strlen($password) <= 5) {
             throw new TigerException("Passwords must be 6 or more characters long.");
         }
 
-        if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
             throw new TigerException("{$email} is not a valid email address.");
         }
 
@@ -75,7 +75,7 @@ class UserService extends BaseService
     public function findUserByUUID($uuid)
     {
         $user = Models\User::search()->where('user_uuid', $uuid)->execOne();
-        if(!$user) {
+        if (!$user) {
             throw new TigerException("Cannot find User by UUID");
         }
         return $user;

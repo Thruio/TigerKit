@@ -7,18 +7,18 @@ use TigerKit\TigerException;
 class ImageService extends BaseService
 {
     /**
-   * @return Models\Image[]
-   */
+     * @return Models\Image[]
+     */
     public function getAllImages()
     {
         return Models\Image::search()->where('deleted', "No")->exec();
     }
 
     /**
-   * @param Models\User $user
-   * @param $uploadFile
-   * @return Models\Image
-   */
+     * @param Models\User $user
+     * @param $uploadFile
+     * @return Models\Image
+     */
     public function uploadImage(Models\User $user, $uploadFile)
     {
         $image = Models\Image::CreateFromUpload($uploadFile);
@@ -28,10 +28,10 @@ class ImageService extends BaseService
     }
 
     /**
-   * @param $tagName
-   * @return Models\Image[]|false
-   * @throws TigerException
-   */
+     * @param $tagName
+     * @return Models\Image[]|false
+     * @throws TigerException
+     */
     public function getImagesByTag($tagName)
     {
         $tagService = new TagService();
@@ -46,7 +46,7 @@ class ImageService extends BaseService
         $imageIds = [];
         foreach ($imageTagLinks as $imageTagLink) {
             /**
- * @var $imageTagLink Models\ImageTagLink
+             * @var $imageTagLink Models\ImageTagLink
 */
             $imageIds[] = $imageTagLink->file_id;
         }
@@ -54,9 +54,9 @@ class ImageService extends BaseService
     }
 
     /**
-   * @param $imageIds
-   * @return Models\Image[]|false
-   */
+     * @param $imageIds
+     * @return Models\Image[]|false
+     */
     public function getImagesByImageIds($imageIds)
     {
         return Models\Image::search()
@@ -98,11 +98,11 @@ class ImageService extends BaseService
         $imageTagLinks = [];
         foreach ($images as $image) {
             /**
- * @var $image Models\Image
+             * @var $image Models\Image
 */
             foreach ($tags as $tag) {
                 /**
- * @var $tag Models\Tag
+                 * @var $tag Models\Tag
 */
                 $imageTagLinks[] = $this->addTag($image, $tag, $user);
             }

@@ -6,7 +6,7 @@ use TigerKit\Models;
 class ThreadService extends BaseService
 {
     /**
- * @var $boardService BoardService
+     * @var $boardService BoardService
 */
     public $boardService;
 

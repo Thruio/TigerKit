@@ -46,8 +46,8 @@ abstract class UserRelatableObject extends VersionedActiveRecord
     }
 
     /**
-   * @return User|false
-   */
+     * @return User|false
+     */
     public function getCreatedUser()
     {
         if (!$this->_created_user) {
@@ -57,8 +57,8 @@ abstract class UserRelatableObject extends VersionedActiveRecord
     }
 
     /**
-   * @return User|false
-   */
+     * @return User|false
+     */
     public function getUpdatedUser()
     {
         if (!$this->_updated_user) {

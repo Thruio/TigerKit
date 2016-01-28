@@ -30,8 +30,8 @@ class File extends UserRelatableObject
     protected $_user;
 
     /**
-   * @return User|false
-   */
+     * @return User|false
+     */
     public function getUser()
     {
         if (!$this->_user) {
@@ -43,14 +43,14 @@ class File extends UserRelatableObject
     }
 
     /**
-   * @param $uploadFile
-   * @return File
-   */
+     * @param $uploadFile
+     * @return File
+     */
     public static function CreateFromUpload($uploadFile)
     {
         $class = get_called_class();
         /**
- * @var File $object
+         * @var File $object
 */
         $object = new $class();
         $object->filename = $uploadFile['name'];

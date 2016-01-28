@@ -20,13 +20,13 @@ class Image extends File
     public $height;
 
     /**
-   * @param $uploadFile
-   * @return Image
-   */
+     * @param $uploadFile
+     * @return Image
+     */
     public static function CreateFromUpload($uploadFile)
     {
         /**
- * @var Image $object
+         * @var Image $object
 */
         $object = parent::CreateFromUpload($uploadFile);
         $size = getimagesize($uploadFile['tmp_name']);
