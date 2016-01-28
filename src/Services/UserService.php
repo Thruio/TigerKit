@@ -75,7 +75,7 @@ class UserService extends BaseService
     public function findUserByUUID($uuid)
     {
         $user = Models\User::search()->where('user_uuid', $uuid)->execOne();
-        if(!$user){
+        if(!$user) {
             throw new TigerException("Cannot find User by UUID");
         }
         return $user;

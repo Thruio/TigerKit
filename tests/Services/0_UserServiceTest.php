@@ -62,7 +62,8 @@ class UserServiceTest extends TigerBaseTest
      * @expectedException \TigerKit\TigerException
      * @expectedExceptionMessage Passwords must be 6 or more characters long.
      */
-    public function testMinimumPasswordLength(){
+    public function testMinimumPasswordLength()
+    {
         $this->assertTrue(
             $this->userService->createUser(
                 $this->faker->userName,
@@ -79,7 +80,8 @@ class UserServiceTest extends TigerBaseTest
      * @expectedException \TigerKit\TigerException
      * @expectedExceptionMessageRegExp /Username (.+) already in use\./
      */
-    public function testEmailMustBeUnique(){
+    public function testEmailMustBeUnique()
+    {
         $existingUser = $this->userService->createUser(
             $this->faker->userName,
             $this->faker->name(),
@@ -95,7 +97,8 @@ class UserServiceTest extends TigerBaseTest
         );
     }
 
-    public function testEmailValid(){
+    public function testEmailValid()
+    {
         $this->assertTrue(
             $this->userService->createUser(
                 $this->faker->userName,
@@ -111,7 +114,8 @@ class UserServiceTest extends TigerBaseTest
      * @expectedException \TigerKit\TigerException
      * @expectedExceptionMessage notvalid is not a valid email address.
      */
-    public function testEmailInValid(){
+    public function testEmailInValid()
+    {
         $this->assertTrue(
             $this->userService->createUser(
                 $this->faker->userName,

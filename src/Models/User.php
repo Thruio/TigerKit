@@ -104,7 +104,7 @@ class User extends UserRelatableObject
 
     public function save($automatic_reload = true)
     {
-        if (!$this->user_uuid){
+        if (!$this->user_uuid) {
             $this->user_uuid = UUID::v4();
         }
         if (!$this->user_id) {
